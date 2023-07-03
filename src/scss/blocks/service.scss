@@ -1,0 +1,30 @@
+.service {
+	margin-bottom: 25px;
+	&__row {
+		flex-direction: row-reverse;
+	}
+	.row {
+		&__icon-wrap {
+			width: 160px;
+			height: 160px;
+			border-radius: 50%;
+			background-color: var(--accent);
+			border: 2px solid black;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			transition: transform 0.3s ease;
+			&:hover {
+				transform: rotate(360deg) scale(1.1);
+			}
+			@media screen and (max-width: 992px) {
+				margin: 0 auto;
+			}
+		}
+		&__icon-img {
+			margin-bottom: 10px;
+			transition: transform 0.2s;
+		}
+	}
+}

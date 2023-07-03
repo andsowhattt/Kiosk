@@ -1,0 +1,12 @@
+.map {
+	&__wrap {
+		height: 400px;
+	}
+	&__social-icon {
+		color: var(--accent);
+		text-decoration: none;
+		&:hover {
+			color: black;
+		}
+	}
+}
