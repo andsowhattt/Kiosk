@@ -6,31 +6,21 @@
 @import 'default/normalize';
 @import 'default/root';
 @import 'default/mode';
-@import 'default/fonts';
 
-@import 'blocks/header';
+@import 'components/header';
+@import 'components/footer';
+@import 'components/buttons';
+@import 'components/carousel';
+
+@import 'blocks/fonts';
 @import 'blocks/main';
 @import 'blocks/about';
 @import 'blocks/shop';
 @import 'blocks/shop-cart';
-@import 'blocks/carousel';
 @import 'blocks/map';
 @import 'blocks/message';
 @import 'blocks/new';
+@import 'blocks/sale';
 @import 'blocks/service';
 @import 'blocks/dark-mode';
-@import 'blocks/footer';
 @import 'blocks/switch';
-
-
-
-
-
-
-
-
-
-
-
-
-

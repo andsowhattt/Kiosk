@@ -1,0 +1,24 @@
+.footer {
+	&__contacts-social {
+		.social {
+			&__list-link {
+				color: var(--accent);
+				text-decoration: none;
+				&:hover {
+					color: white;
+				}
+			}
+		}
+	}
+	&__contacts-location {
+		.location {
+			&__info-scroll {
+				color: var(--accent);
+				text-decoration: none;
+				&:hover {
+					color: white;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,15 @@
+.dark-mode {
+	& .circle-icon {
+		color: black;
+	}
+	& .enlarged-icon:hover {
+		color: white;
+	}
+	& .navbar-top{
+		background-color: var(--accent);
+	}
+	& .fab:hover {
+		color: white;
+		text-decoration: none;
+	}
+} 

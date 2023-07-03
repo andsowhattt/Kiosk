@@ -1,13 +1,12 @@
-.custom-btn {
+.btn {
 	background-color: var(--accent); 
 	border: none;
 	color: black;
 	padding: 5px;
 	transition: transform 0.2s;
+	&:hover {
+		transform: scale(1.1);
+	}
 }
-.custom-btn:hover {
-	transform: scale(1.1);
-}
-.message-form {
-	margin-bottom: 15px;
-}
+
+

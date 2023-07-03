@@ -42,8 +42,8 @@ function renderProducts(products, containerClass) {
 }
 
 fetchProducts(productsLink, '.products');
-fetchProducts(randomProductsLink, '.random-products');
-fetchProducts(randomSaleLink, '.sale-products');
+fetchProducts(randomProductsLink, '.random__products');
+fetchProducts(randomSaleLink, '.sale__products');
 
 
 
