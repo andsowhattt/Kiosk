@@ -40,4 +40,3 @@ export function renderProducts(products, containerClass) {
 		container.appendChild(card);
 	});
 }
-

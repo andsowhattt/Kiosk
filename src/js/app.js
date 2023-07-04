@@ -15,6 +15,3 @@ window.addEventListener('load', () => {
 
 
 initCounter();
-
-
-
