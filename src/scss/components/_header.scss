@@ -76,10 +76,10 @@
 }
 
 .last-items-list {
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
-}
+	max-height: 200px;
+	overflow-y: auto;
+ }
+ 
 
 .last-item {
 	display: flex;
@@ -88,8 +88,8 @@
 }
 
 .last-item-image {
-	width: 50px;
-	height: 50px;
+	width: 100px;
+	height: 100px;
 	object-fit: cover;
 	margin-right: 10px;
 }

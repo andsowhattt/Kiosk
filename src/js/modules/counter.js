@@ -18,23 +18,35 @@ export function initCounter() {
 	}
 
 	function updateLastItems() {
-		const lastItemsList = document.querySelector('.last-items-list');
+		const lastItemsContainer = document.querySelector('.last-items-list');
 		const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
 
-		lastItemsList.innerHTML = '';
+		lastItemsContainer.innerHTML = '';
 
 		lastItems.forEach(item => {
-			const li = document.createElement('li');
-			li.innerHTML = `
-				  <div class="last-item">
-						<img src="${item.image}" alt="${item.title}" class="last-item-image">
-						<div class="last-item-details">
-							 <h6>${item.title}</h6>
-							 <p class="last-item-price">${item.price}</p>
-						</div>
-				  </div>
-			 `;
-			lastItemsList.appendChild(li);
+			const div = document.createElement('div');
+			div.classList.add('last-item');
+
+			const img = document.createElement('img');
+			img.src = item.image;
+			img.alt = item.title;
+			img.classList.add('last-item-image');
+			div.appendChild(img);
+
+			const itemDetails = document.createElement('div');
+			itemDetails.classList.add('last-item-details');
+
+			const h6 = document.createElement('h6');
+			h6.textContent = item.title;
+			itemDetails.appendChild(h6);
+
+			const p = document.createElement('p');
+			p.classList.add('last-item-price');
+			p.textContent = item.price;
+			itemDetails.appendChild(p);
+
+			div.appendChild(itemDetails);
+			lastItemsContainer.appendChild(div);
 		});
 	}
 
@@ -49,14 +61,11 @@ export function initCounter() {
 
 			const productTitle = event.target.closest('.card-body').querySelector('.card-title').textContent;
 			const productPrice = event.target.closest('.card-body').querySelector('.card-text').textContent;
+			const productImage = event.target.closest('.card').querySelector('.card-img-top').src;
 
 			const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
 
-			lastItems.push({ title: productTitle, price: productPrice });
-
-			if (lastItems.length > 3) {
-				lastItems.shift();
-			}
+			lastItems.unshift({ title: productTitle, price: productPrice, image: productImage });
 
 			localStorage.setItem('lastItems', JSON.stringify(lastItems));
 			updateLastItems();
