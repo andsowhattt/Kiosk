@@ -1,4 +1,5 @@
 export function initCounter() {
+	
 	const buyCountElement = document.getElementById('buyCount');
 	const wishlistCountElement = document.getElementById('wishlistCount');
 	const cartIcon = document.querySelector('.buy');

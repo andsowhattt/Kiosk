@@ -25,15 +25,40 @@
 					<i class="cart__icon fas fa-heart enlarged-icon"></i>
 					<span id="wishlistCount" class="count"></span>
 				</a>
-				<a class="cart__link navbar-icon" href="#">
+				<a class="cart__link navbar-icon" href="#" data-toggle="modal" data-target="#cartModal">
 					<i class="cart__icon buy fas fa-solid fa-cart-shopping enlarged-icon"></i>
 					<span id="buyCount" class="count"></span>
 				</a>
+				<div class="modal" id="cartModal">
+					<div class="modal-dialog">
+					  <div class="modal-content">
+						 <div class="modal-header">
+							<h5 class="modal-title">Корзина</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+						 </div>
+						 <div class="modal-body">
+							<ul class="cart-items-list"></ul>
+							<div class="last-items">
+							  <h6>Останні товари:</h6>
+							  <ul class="last-items-list"></ul>
+							</div>
+						 </div>
+						 <div class="modal-footer">
+							<button type="button" class="btn btn-primary">Оформити покупку</button>
+						 </div>
+					  </div>
+					</div>
+				 </div>
+				 
+				
+
 			</div>
-		</div>		
+		</div>
 		<div class="header__menu navbar navbar-expand-lg navbar-light navbar-lg">
-			<button class="header__menu-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="header__menu-toggler navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="header__menu-bar bar collapse navbar-collapse test" id="navbarNav">
