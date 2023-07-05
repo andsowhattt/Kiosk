@@ -1,4 +1,4 @@
-export const productsLink = 'https://api.escuelajs.co/api/v1/products';
+export const productsLink = 'https://api.escuelajs.co/api/v1/products?categoryId=1';
 export const randomProductsLink = 'https://api.escuelajs.co/api/v1/products?offset=0&limit=3';
 export const randomSaleLink = 'https://api.escuelajs.co/api/v1/products?offset=0&limit=6';
 
@@ -22,21 +22,20 @@ export function renderProducts(products, containerClass) {
 		card.innerHTML = `
       <div class="card">
 			<img class="card-img-top" src="${product.images}" alt="${product.title}">
-				<div class="card-body">
-					<h5 class="card-title">${product.title}</h5>
-					<p class="card-text">$${product.price}</p>
-						<div class="product-actions">
-							<div class="product-buy-actions">
-								<a href="#" class="btn my-btn"><i class="fas fa-shopping-cart enlarged-icon"></i>Buy</a>
-								<a href="#" class="btn btn-secondary"><i class="fas fa-heart enlarged-icon"></i>Wishlist this</a>
-							</div>
-							<div class="products-details">
-								<a href="#" class="btn btn-dark">View Details</a>
-							</div>
-						</div>
-				</div>
+			<div class="card-body">
+				<h5 class="card-title">${product.title}</h5>
+				<p class="card-text">$${product.price}</p>
+				<div class="product-actions">
+				<div class="product-buy-actions">
+					<a href="#" class="btn my-btn"><i class="fas fa-shopping-cart enlarged-icon"></i>Buy</a>
+					<a href="#" class="btn btn-secondary"><i class="fas fa-heart enlarged-icon"></i>Wishlist this</a>
+            </div>
+            <div class="products-details">
+					<a href="#" class="btn btn-dark">View Details</a>
+            </div>
+         </div>
+      </div>
       </div>`;
-
 		container.appendChild(card);
 	});
 }

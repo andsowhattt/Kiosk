@@ -1,11 +1,8 @@
+// import 'boxicons';
 import './modules/toggler.js';
 import { carouselSwitcher } from './modules/carousel.js';
 import { productsLink, randomProductsLink, randomSaleLink, fetchProducts } from './modules/shop.js';
-import { initCounter } from './modules/counter.js';
-
-
-
-carouselSwitcher();
+import { Counter } from './modules/counter.js';
 
 window.addEventListener('load', () => {
 	fetchProducts(productsLink, '.products');
@@ -13,5 +10,7 @@ window.addEventListener('load', () => {
 	fetchProducts(randomSaleLink, '.sale__products');
 });
 
+new Counter();
 
-initCounter();
+carouselSwitcher();
+

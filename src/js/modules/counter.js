@@ -1,23 +1,32 @@
-export function initCounter() {
-	const buyCountElement = document.getElementById('buyCount');
-	const wishlistCountElement = document.getElementById('wishlistCount');
-	const cartIcon = document.querySelector('.buy');
+export class Counter {
+	constructor() {
+		this.buyCountElement = document.getElementById('buyCount');
+		this.wishlistCountElement = document.getElementById('wishlistCount');
+		this.cartIcon = document.querySelector('.buy');
 
-	let buyCount = localStorage.getItem('buyCount') || 0;
-	let wishlistCount = localStorage.getItem('wishlistCount') || 0;
+		this.buyCount = localStorage.getItem('buyCount') || 0;
+		this.wishlistCount = localStorage.getItem('wishlistCount') || 0;
 
-	function updateCount(element, count, key) {
+		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
+		this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
+		this.updateLastItems();
+
+		document.addEventListener('click', this.handleProductBuyClick.bind(this));
+		document.addEventListener('click', this.handleWishlistClick.bind(this));
+	}
+
+	updateCount(element, count, key) {
 		element.textContent = count > 0 ? count : '';
 		localStorage.setItem(key, count);
 
 		if (count > 0 && key === 'buyCount') {
-			cartIcon.classList.add('fa-beat');
+			this.cartIcon.classList.add('fa-beat');
 		} else {
-			cartIcon.classList.remove('fa-beat');
+			this.cartIcon.classList.remove('fa-beat');
 		}
 	}
 
-	function updateLastItems() {
+	updateLastItems() {
 		const lastItemsContainer = document.querySelector('.last-items-list');
 		const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
 
@@ -50,14 +59,10 @@ export function initCounter() {
 		});
 	}
 
-	updateCount(buyCountElement, buyCount, 'buyCount');
-	updateCount(wishlistCountElement, wishlistCount, 'wishlistCount');
-	updateLastItems();
-
-	document.addEventListener('click', function (event) {
+	handleProductBuyClick(event) {
 		if (event.target.matches('.product-buy-actions .my-btn') && event.target.closest('.my-btn')) {
-			buyCount++;
-			updateCount(buyCountElement, buyCount, 'buyCount');
+			this.buyCount++;
+			this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 
 			const productTitle = event.target.closest('.card-body').querySelector('.card-title').textContent;
 			const productPrice = event.target.closest('.card-body').querySelector('.card-text').textContent;
@@ -68,14 +73,14 @@ export function initCounter() {
 			lastItems.unshift({ title: productTitle, price: productPrice, image: productImage });
 
 			localStorage.setItem('lastItems', JSON.stringify(lastItems));
-			updateLastItems();
+			this.updateLastItems();
 		}
-	});
+	}
 
-	document.addEventListener('click', function (event) {
+	handleWishlistClick(event) {
 		if (event.target.matches('.product-buy-actions .btn-secondary')) {
-			wishlistCount++;
-			updateCount(wishlistCountElement, wishlistCount, 'wishlistCount');
+			this.wishlistCount++;
+			this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
 		}
-	});
+	}
 }
