@@ -4,8 +4,8 @@ export class Counter {
 		this.wishlistCountElement = document.getElementById('wishlistCount');
 		this.cartIcon = document.querySelector('.buy');
 
-		this.buyCount = localStorage.getItem('buyCount') || 0;
-		this.wishlistCount = localStorage.getItem('wishlistCount') || 0;
+		this.buyCount = parseInt(localStorage.getItem('buyCount')) || 0;
+		this.wishlistCount = parseInt(localStorage.getItem('wishlistCount')) || 0;
 
 		this.updateCount = this.updateCount.bind(this);
 
@@ -28,6 +28,26 @@ export class Counter {
 		} else {
 			this.cartIcon.classList.remove('fa-beat');
 		}
+
+		this.updateTotalPrice();
+	}
+
+	updateTotalPrice() {
+		const totalElement = document.getElementById('totalPrice');
+		const totalPrice = this.calculateTotalPrice();
+		totalElement.textContent = `$${totalPrice}`;
+	}
+
+	calculateTotalPrice() {
+		const totalPriceElements = document.querySelectorAll('.total-price');
+		let totalPrice = 0;
+
+		totalPriceElements.forEach(element => {
+			const price = parseFloat(element.textContent.replace('$', ''));
+			totalPrice += price;
+		});
+
+		return totalPrice.toFixed(2);
 	}
 
 	updateLastItems() {
@@ -58,8 +78,7 @@ export class Counter {
 			const quantityWrapper = document.createElement('div');
 			quantityWrapper.classList.add('quantity-wrapper');
 
-			const minusIcon = document.createElement('i');
-			minusIcon.classList.add('fa-solid', 'fa-circle-minus', 'quantity-icon');
+			const minusIcon = this.createIconElement('fa-circle-minus', 'quantity-icon');
 			quantityWrapper.appendChild(minusIcon);
 
 			const quantity = document.createElement('span');
@@ -67,12 +86,10 @@ export class Counter {
 			quantity.textContent = '1';
 			quantityWrapper.appendChild(quantity);
 
-			const plusIcon = document.createElement('i');
-			plusIcon.classList.add('fa-solid', 'fa-circle-plus', 'quantity-icon');
+			const plusIcon = this.createIconElement('fa-circle-plus', 'quantity-icon');
 			quantityWrapper.appendChild(plusIcon);
 
-			const removeIcon = document.createElement('i');
-			removeIcon.classList.add('fa-sharp', 'fa-solid', 'fa-trash', 'remove-icon');
+			const removeIcon = this.createIconElement('fa-trash', 'remove-icon');
 			quantityWrapper.appendChild(removeIcon);
 
 			itemDetails.appendChild(quantityWrapper);
@@ -88,9 +105,9 @@ export class Counter {
 			div.setAttribute('data-index', index);
 		});
 
-		// Оновлення лічильника buyCount після оновлення списку останніх товарів
 		this.buyCount = lastItems.length;
 		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
+		this.updateTotalPrice();
 	}
 
 	handleProductBuyClick(event) {
@@ -120,25 +137,26 @@ export class Counter {
 
 	handleQuantityClick(event) {
 		if (event.target.classList.contains('fa-circle-plus')) {
-			const quantityElement = event.target.parentNode.querySelector('.quantity');
-			const quantity = parseInt(quantityElement.textContent);
-			quantityElement.textContent = quantity + 1;
+			this.handleQuantityChange(event, 1);
+		} else if (event.target.classList.contains('fa-circle-minus')) {
+			this.handleQuantityChange(event, -1);
+		}
+	}
+
+	handleQuantityChange(event, increment) {
+		const quantityElement = event.target.parentNode.querySelector('.quantity');
+		const quantity = parseInt(quantityElement.textContent);
+		const newQuantity = quantity + increment;
+
+		if (newQuantity > 0) {
+			quantityElement.textContent = newQuantity;
 
 			const priceElement = event.target.parentNode.parentNode.querySelector('.total-price');
 			const price = parseFloat(priceElement.textContent.replace('$', ''));
 			const initialPrice = price / quantity;
-			priceElement.textContent = `$${initialPrice * (quantity + 1)}`;
-		} else if (event.target.classList.contains('fa-circle-minus')) {
-			const quantityElement = event.target.parentNode.querySelector('.quantity');
-			const quantity = parseInt(quantityElement.textContent);
-			if (quantity > 1) {
-				quantityElement.textContent = quantity - 1;
+			priceElement.textContent = `$${initialPrice * newQuantity}`;
 
-				const priceElement = event.target.parentNode.parentNode.querySelector('.total-price');
-				const price = parseFloat(priceElement.textContent.replace('$', ''));
-				const initialPrice = price / quantity;
-				priceElement.textContent = `$${initialPrice * (quantity - 1)}`;
-			}
+			this.updateTotalPrice();
 		}
 	}
 
@@ -154,21 +172,25 @@ export class Counter {
 			this.buyCount = lastItems.length;
 			this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 
-			// Оновлення списку останніх товарів
 			this.updateLastItems();
 
-			// Перевірка, чи останній товар видалено
 			if (lastItems.length === 0) {
 				const cartModal = document.getElementById('cartModal');
 				const modalBackdrop = document.querySelector('.modal-backdrop');
 
-				// Закриття модального вікна і видалення підкладки
 				cartModal.classList.remove('show');
 				modalBackdrop.parentNode.removeChild(modalBackdrop);
 
-				// Закриття модального вікна
 				cartModal.style.display = 'none';
 			}
+
+			this.updateTotalPrice();
 		}
+	}
+
+	createIconElement(iconClass, iconWrapperClass) {
+		const icon = document.createElement('i');
+		icon.classList.add('fa-solid', 'fa-sharp', iconClass, iconWrapperClass);
+		return icon;
 	}
 }

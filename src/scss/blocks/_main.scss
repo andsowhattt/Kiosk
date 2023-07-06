@@ -17,9 +17,9 @@
 	overflow: hidden;
 	text-overflow: ellipsis; 
 }
-// .card-col {
-// 	position: relative;
-// }
+.card-col {
+	position: relative;
+}
 // .card:hover {
 // 	padding: 10px;
 // 	border: 1px solid var(--accent);
@@ -31,3 +31,8 @@
 // 	align-items: center;
 // 	gap: 1.5rem;
 // }
+.total-price-text {
+	margin-top: 20px;
+	font-weight: bold;
+ }
+ 
