@@ -7,12 +7,15 @@ export class Counter {
 		this.buyCount = localStorage.getItem('buyCount') || 0;
 		this.wishlistCount = localStorage.getItem('wishlistCount') || 0;
 
+		this.updateCount = this.updateCount.bind(this);
+
 		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 		this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
 		this.updateLastItems();
 
 		document.addEventListener('click', this.handleProductBuyClick.bind(this));
 		document.addEventListener('click', this.handleWishlistClick.bind(this));
+		document.addEventListener('click', this.handleQuantityClick.bind(this));
 	}
 
 	updateCount(element, count, key) {
@@ -49,10 +52,30 @@ export class Counter {
 			h6.textContent = item.title;
 			itemDetails.appendChild(h6);
 
-			const p = document.createElement('p');
-			p.classList.add('last-item-price');
-			p.textContent = item.price;
-			itemDetails.appendChild(p);
+			const price = parseFloat(item.price.replace('$', ''));
+
+			const quantityWrapper = document.createElement('div');
+			quantityWrapper.classList.add('quantity-wrapper');
+
+			const minusIcon = document.createElement('i');
+			minusIcon.classList.add('fa-solid', 'fa-circle-minus', 'quantity-icon');
+			quantityWrapper.appendChild(minusIcon);
+
+			const quantity = document.createElement('span');
+			quantity.classList.add('quantity');
+			quantity.textContent = '1'; 
+			quantityWrapper.appendChild(quantity);
+
+			const plusIcon = document.createElement('i');
+			plusIcon.classList.add('fa-solid', 'fa-circle-plus', 'quantity-icon');
+			quantityWrapper.appendChild(plusIcon);
+
+			itemDetails.appendChild(quantityWrapper);
+
+			const totalPrice = document.createElement('span');
+			totalPrice.classList.add('total-price');
+			totalPrice.textContent = `$${price}`;
+			itemDetails.appendChild(totalPrice);
 
 			div.appendChild(itemDetails);
 			lastItemsContainer.appendChild(div);
@@ -81,6 +104,30 @@ export class Counter {
 		if (event.target.matches('.product-buy-actions .btn-secondary')) {
 			this.wishlistCount++;
 			this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
+		}
+	}
+
+	handleQuantityClick(event) {
+		if (event.target.classList.contains('fa-circle-plus')) {
+			const quantityElement = event.target.parentNode.querySelector('.quantity');
+			const quantity = parseInt(quantityElement.textContent);
+			quantityElement.textContent = quantity + 1;
+
+			const priceElement = event.target.parentNode.parentNode.querySelector('.total-price');
+			const price = parseFloat(priceElement.textContent.replace('$', ''));
+			const initialPrice = price / quantity;
+			priceElement.textContent = `$${initialPrice * (quantity + 1)}`;
+		} else if (event.target.classList.contains('fa-circle-minus')) {
+			const quantityElement = event.target.parentNode.querySelector('.quantity');
+			const quantity = parseInt(quantityElement.textContent);
+			if (quantity > 1) {
+				quantityElement.textContent = quantity - 1;
+
+				const priceElement = event.target.parentNode.parentNode.querySelector('.total-price');
+				const price = parseFloat(priceElement.textContent.replace('$', ''));
+				const initialPrice = price / quantity;
+				priceElement.textContent = `$${initialPrice * (quantity - 1)}`;
+			}
 		}
 	}
 }
