@@ -64,7 +64,7 @@ export class Counter {
 
 			const quantity = document.createElement('span');
 			quantity.classList.add('quantity');
-			quantity.textContent = '1'; 
+			quantity.textContent = '1';
 			quantityWrapper.appendChild(quantity);
 
 			const plusIcon = document.createElement('i');
@@ -149,7 +149,26 @@ export class Counter {
 
 			lastItems.splice(itemIndex, 1);
 			localStorage.setItem('lastItems', JSON.stringify(lastItems));
+
+			// Оновлення лічильника buyCount
+			this.buyCount = lastItems.length;
+			this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
+
+			// Оновлення списку останніх товарів
 			this.updateLastItems();
+
+			// Перевірка, чи останній товар видалено
+			if (lastItems.length === 0) {
+				const cartModal = document.getElementById('cartModal');
+				const modalBackdrop = document.querySelector('.modal-backdrop');
+
+				// Закриття модального вікна і видалення підкладки
+				cartModal.classList.remove('show');
+				modalBackdrop.parentNode.removeChild(modalBackdrop);
+
+				// Закриття модального вікна
+				cartModal.style.display = 'none';
+			}
 		}
 	}
 }
