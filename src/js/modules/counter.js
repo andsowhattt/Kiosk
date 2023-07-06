@@ -16,6 +16,7 @@ export class Counter {
 		document.addEventListener('click', this.handleProductBuyClick.bind(this));
 		document.addEventListener('click', this.handleWishlistClick.bind(this));
 		document.addEventListener('click', this.handleQuantityClick.bind(this));
+		document.addEventListener('click', this.handleRemoveItemClick.bind(this));
 	}
 
 	updateCount(element, count, key) {
@@ -35,7 +36,7 @@ export class Counter {
 
 		lastItemsContainer.innerHTML = '';
 
-		lastItems.forEach(item => {
+		lastItems.forEach((item, index) => {
 			const div = document.createElement('div');
 			div.classList.add('last-item');
 
@@ -70,6 +71,10 @@ export class Counter {
 			plusIcon.classList.add('fa-solid', 'fa-circle-plus', 'quantity-icon');
 			quantityWrapper.appendChild(plusIcon);
 
+			const removeIcon = document.createElement('i');
+			removeIcon.classList.add('fa-sharp', 'fa-solid', 'fa-trash', 'remove-icon');
+			quantityWrapper.appendChild(removeIcon);
+
 			itemDetails.appendChild(quantityWrapper);
 
 			const totalPrice = document.createElement('span');
@@ -79,7 +84,13 @@ export class Counter {
 
 			div.appendChild(itemDetails);
 			lastItemsContainer.appendChild(div);
+
+			div.setAttribute('data-index', index);
 		});
+
+		// Оновлення лічильника buyCount після оновлення списку останніх товарів
+		this.buyCount = lastItems.length;
+		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 	}
 
 	handleProductBuyClick(event) {
@@ -128,6 +139,17 @@ export class Counter {
 				const initialPrice = price / quantity;
 				priceElement.textContent = `$${initialPrice * (quantity - 1)}`;
 			}
+		}
+	}
+
+	handleRemoveItemClick(event) {
+		if (event.target.classList.contains('remove-icon')) {
+			const itemIndex = event.target.closest('.last-item').getAttribute('data-index');
+			const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
+
+			lastItems.splice(itemIndex, 1);
+			localStorage.setItem('lastItems', JSON.stringify(lastItems));
+			this.updateLastItems();
 		}
 	}
 }
