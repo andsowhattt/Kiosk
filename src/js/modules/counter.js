@@ -83,7 +83,7 @@ export class Counter {
 
 			const quantity = document.createElement('span');
 			quantity.classList.add('quantity');
-			quantity.textContent = '1';
+			quantity.textContent = item.quantity || '1'; // Додали оновлення кількості товару
 			quantityWrapper.appendChild(quantity);
 
 			const plusIcon = this.createIconElement('fa-circle-plus', 'quantity-icon');
@@ -96,7 +96,7 @@ export class Counter {
 
 			const totalPrice = document.createElement('span');
 			totalPrice.classList.add('total-price');
-			totalPrice.textContent = `$${price}`;
+			totalPrice.textContent = `$${price * (item.quantity || 1)}`; // Оновлено обчислення загальної ціни
 			itemDetails.appendChild(totalPrice);
 
 			div.appendChild(itemDetails);
@@ -105,7 +105,7 @@ export class Counter {
 			div.setAttribute('data-index', index);
 		});
 
-		this.buyCount = lastItems.length;
+		this.buyCount = lastItems.reduce((total, item) => total + (item.quantity || 1), 0); // Оновлено лічильник buyCount
 		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 		this.updateTotalPrice();
 	}
@@ -121,7 +121,7 @@ export class Counter {
 
 			const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
 
-			lastItems.unshift({ title: productTitle, price: productPrice, image: productImage });
+			lastItems.unshift({ title: productTitle, price: productPrice, image: productImage, quantity: 1 }); // Додано збереження кількості товару
 
 			localStorage.setItem('lastItems', JSON.stringify(lastItems));
 			this.updateLastItems();
@@ -157,19 +157,29 @@ export class Counter {
 			priceElement.textContent = `$${initialPrice * newQuantity}`;
 
 			this.updateTotalPrice();
+
+			// Оновлення лічильника buyCount на підставі зміненої кількості товару
+			const itemIndex = event.target.closest('.last-item').getAttribute('data-index');
+			const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
+			lastItems[itemIndex].quantity = newQuantity;
+			localStorage.setItem('lastItems', JSON.stringify(lastItems));
+
+			// Оновлення лічильника buyCount після зміни кількості товару в корзині
+			this.buyCount = lastItems.reduce((total, item) => total + (item.quantity || 1), 0);
+			this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 		}
 	}
 
 	handleRemoveItemClick(event) {
 		if (event.target.classList.contains('remove-icon')) {
-			const itemIndex = event.target.closest('.last-item').getAttribute('data-index');
+const itemIndex = event.target.closest('.last-item').getAttribute('data-index');
 			const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
 
 			lastItems.splice(itemIndex, 1);
 			localStorage.setItem('lastItems', JSON.stringify(lastItems));
 
 			// Оновлення лічильника buyCount
-			this.buyCount = lastItems.length;
+			this.buyCount = lastItems.reduce((total, item) => total + (item.quantity || 1), 0);
 			this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 
 			this.updateLastItems();
