@@ -21,5 +21,17 @@ new Counter();
 
 carouselSwitcher();
 
+const form = document.querySelector('.needs-validation');
+  const submitBtn = document.querySelector('button[type="submit"]');
 
-
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    if (form.checkValidity()) {
+      // Form is valid, proceed with submission
+      window.location.href = "thx.html"; // Replace with your desired page
+    } else {
+      // Form is invalid, display error messages
+      event.stopPropagation();
+      form.classList.add('was-validated');
+    }
+  });
