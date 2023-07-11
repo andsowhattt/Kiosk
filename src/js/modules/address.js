@@ -58,9 +58,9 @@ class DistrictSelector {
 
 	updateDistricts() {
 		const selectedCity = this.citySelect.value;
-
+	
 		this.districtSelect.innerHTML = '';
-
+	
 		if (selectedCity === '') {
 			const defaultOption = document.createElement('option');
 			defaultOption.value = '';
@@ -68,15 +68,20 @@ class DistrictSelector {
 			this.districtSelect.add(defaultOption);
 			return;
 		}
-
-		const districts = this.districtsByCity[selectedCity];
-
+	
+		let districts = this.districtsByCity[selectedCity];
+	
+		if (selectedCity === 'Other') {
+			districts = ['Other']; // Додати варіант "Other" до поля District
+		}
+	
 		districts.forEach((district) => {
 			const option = document.createElement('option');
 			option.text = district;
 			this.districtSelect.add(option);
 		});
 	}
+	
 
 	checkCustomOption() {
 		if (
@@ -95,12 +100,16 @@ class DistrictSelector {
 		customCityInput.id = 'customCityInput';
 		customCityInput.classList.add('form-control');
 		customCityInput.placeholder = 'Enter your city';
+		customCityInput.required = true;
+		customCityInput.pattern = '[A-Za-z]+';
 
 		const customDistrictInput = document.createElement('input');
 		customDistrictInput.type = 'text';
 		customDistrictInput.id = 'customDistrictInput';
 		customDistrictInput.classList.add('form-control');
 		customDistrictInput.placeholder = 'Enter your district';
+		customDistrictInput.required = true;
+		customDistrictInput.pattern = '[A-Za-z]+';
 
 		this.citySelect.insertAdjacentElement('afterend', customCityInput);
 		this.districtSelect.insertAdjacentElement('afterend', customDistrictInput);
