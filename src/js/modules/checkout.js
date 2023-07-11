@@ -32,6 +32,7 @@ class DistrictSelector {
 		this.citySelect = document.getElementById(this.citySelectId);
 		this.districtSelect = document.getElementById(this.districtSelectId);
 		this.deliverySelect = document.getElementById(this.deliverySelectId);
+		this.ccExpirationInput = document.getElementById('cc-expiration');
 
 		this.citySelect.addEventListener('change', this.updateDistricts.bind(this));
 		this.deliverySelect.addEventListener('change', this.updateDeliveryDetails.bind(this));
@@ -39,6 +40,8 @@ class DistrictSelector {
 
 		this.citySelect.addEventListener('change', this.checkCustomOption.bind(this));
 		this.districtSelect.addEventListener('change', this.checkCustomOption.bind(this));
+
+		this.ccExpirationInput.addEventListener('input', this.addSlash.bind(this));
 	}
 
 	updateCityOptions() {
@@ -136,12 +139,16 @@ class DistrictSelector {
 			cityInput.id = 'cityInput';
 			cityInput.classList.add('form-control');
 			cityInput.placeholder = 'Enter your city';
+			cityInput.required = true;
+			cityInput.pattern = '[A-Za-z]+';
 
 			const postOfficeInput = document.createElement('input');
 			postOfficeInput.type = 'text';
 			postOfficeInput.id = 'postOfficeInput';
 			postOfficeInput.classList.add('form-control');
 			postOfficeInput.placeholder = 'Enter post office number';
+			postOfficeInput.required = true;
+			postOfficeInput.pattern = '[0-9]+';
 
 			deliveryDetailsContainer.appendChild(cityInput);
 			deliveryDetailsContainer.appendChild(postOfficeInput);
@@ -151,22 +158,52 @@ class DistrictSelector {
 			addressInput.id = 'addressInput';
 			addressInput.classList.add('form-control');
 			addressInput.placeholder = 'Enter your address';
+			addressInput.required = true;
+			addressInput.pattern = '[A-Za-z]+';
 
 			const datePicker = document.createElement('input');
 			datePicker.type = 'date';
 			datePicker.id = 'datePicker';
 			datePicker.classList.add('form-control');
+			datePicker.required = true;
+
+			const today = new Date().toISOString().split('T')[0];
+			datePicker.min = today;
+
+			const timePickerContainer = document.createElement('div');
+			timePickerContainer.classList.add('time-picker-container');
 
 			const timePicker = document.createElement('input');
 			timePicker.type = 'time';
 			timePicker.id = 'timePicker';
 			timePicker.classList.add('form-control');
+			timePicker.required = true;
+			timePicker.min = '08:00';
+			timePicker.max = '20:00';
+
+			const workingHoursMessage = document.createElement('p');
+			workingHoursMessage.textContent = 'Working hours: 08:00 - 20:00';
+
+			timePickerContainer.appendChild(timePicker);
+			timePickerContainer.appendChild(workingHoursMessage);
 
 			deliveryDetailsContainer.appendChild(addressInput);
 			deliveryDetailsContainer.appendChild(datePicker);
-			deliveryDetailsContainer.appendChild(timePicker);
+			deliveryDetailsContainer.appendChild(timePickerContainer);
 		}
 	}
+
+	addSlash(event) {
+		const input = event.target;
+		const trimmedValue = input.value.replace(/\s/g, '');
+		const newValue = trimmedValue.replace(/(\d{2})(\d{0,2})$/, '$1/$2');
+	 
+		input.value = newValue.slice(0, 5); // Обмежуємо довжину рядка до 5 символів (наприклад, 11/22)
+	 }
+	 
+	
+	 
+	 
 
 }
 

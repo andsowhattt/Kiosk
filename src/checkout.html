@@ -203,12 +203,13 @@
 					<div class="row">
 						<div class="col-md-3 mb-3">
 							<label for="cc-expiration">Expiration</label>
-							<input type="text" class="form-control" id="cc-expiration" placeholder="" pattern="\d{2}\/\d{2}"
+							<input type="text" class="form-control" id="cc-expiration" placeholder="" pattern="\d{1,2}\/\d{2}"
 								required>
 							<div class="invalid-feedback">
 								Expiration date required. Please use the format MM/YY.
 							</div>
 						</div>
+						
 						<div class="col-md-3 mb-3">
 							<label for="cc-cvv">CVV</label>
 							<input type="text" class="form-control" id="cc-cvv" placeholder="" pattern="\d{3}" required>
