@@ -6,9 +6,10 @@ import { Counter } from './modules/counter.js';
 import DistrictSelector from './modules/address.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-	const districtSelector = new DistrictSelector('city', 'district');
- });
- 
+  const districtSelector = new DistrictSelector('city', 'district', 'delivery');
+});
+
+
 
 window.addEventListener('load', () => {
 	fetchProducts(productsLink, '.products');
@@ -19,4 +20,6 @@ window.addEventListener('load', () => {
 new Counter();
 
 carouselSwitcher();
+
+
 

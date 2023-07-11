@@ -1,7 +1,8 @@
 class DistrictSelector {
-	constructor(citySelectId, districtSelectId) {
+	constructor(citySelectId, districtSelectId, deliverySelectId) {
 		this.citySelectId = citySelectId;
 		this.districtSelectId = districtSelectId;
+		this.deliverySelectId = deliverySelectId;
 		this.districtsByCity = {
 			"Kyiv": ["Kyiv", "Bilotserkivskyi", "Boryspilskyi", "Brovarskyi,", "Vyshhorodskyi", "Obukhivskyi", "Fastivskyi", "Buchanskyi"],
 			"Vinnytsia": ["Vinnytsia", "Haysynskyi", "Zhmerynskyi", "Mogilev-Podilskyi", "Tulchynskyi", "Khmilnytskyi"],
@@ -30,8 +31,10 @@ class DistrictSelector {
 
 		this.citySelect = document.getElementById(this.citySelectId);
 		this.districtSelect = document.getElementById(this.districtSelectId);
+		this.deliverySelect = document.getElementById(this.deliverySelectId);
 
 		this.citySelect.addEventListener('change', this.updateDistricts.bind(this));
+		this.deliverySelect.addEventListener('change', this.updateDeliveryDetails.bind(this));
 		this.updateCityOptions();
 
 		this.citySelect.addEventListener('change', this.checkCustomOption.bind(this));
@@ -112,6 +115,51 @@ class DistrictSelector {
 			customDistrictInput.remove();
 		}
 	}
+
+	updateDeliveryDetails() {
+		const delivery = this.deliverySelect.value;
+		const deliveryDetailsContainer = document.getElementById('deliveryDetails');
+		deliveryDetailsContainer.innerHTML = '';
+
+		if (delivery === 'Nova Poshta' || delivery === 'Ukr Poshta') {
+			const cityInput = document.createElement('input');
+			cityInput.type = 'text';
+			cityInput.id = 'cityInput';
+			cityInput.classList.add('form-control');
+			cityInput.placeholder = 'Enter your city';
+
+			const postOfficeInput = document.createElement('input');
+			postOfficeInput.type = 'text';
+			postOfficeInput.id = 'postOfficeInput';
+			postOfficeInput.classList.add('form-control');
+			postOfficeInput.placeholder = 'Enter post office number';
+
+			deliveryDetailsContainer.appendChild(cityInput);
+			deliveryDetailsContainer.appendChild(postOfficeInput);
+		} else if (delivery === 'Courier Delivery') {
+			const addressInput = document.createElement('input');
+			addressInput.type = 'text';
+			addressInput.id = 'addressInput';
+			addressInput.classList.add('form-control');
+			addressInput.placeholder = 'Enter your address';
+
+			const datePicker = document.createElement('input');
+			datePicker.type = 'date';
+			datePicker.id = 'datePicker';
+			datePicker.classList.add('form-control');
+
+			const timePicker = document.createElement('input');
+			timePicker.type = 'time';
+			timePicker.id = 'timePicker';
+			timePicker.classList.add('form-control');
+
+			deliveryDetailsContainer.appendChild(addressInput);
+			deliveryDetailsContainer.appendChild(datePicker);
+			deliveryDetailsContainer.appendChild(timePicker);
+		}
+	}
+
 }
+
 
 export default DistrictSelector;
