@@ -4,7 +4,7 @@ class DistrictSelector {
 		this.districtSelectId = districtSelectId;
 		this.deliverySelectId = deliverySelectId;
 		this.districtsByCity = {
-			"Kyiv": ["Kyiv", "Bilotserkivskyi", "Boryspilskyi", "Brovarskyi,", "Vyshhorodskyi", "Obukhivskyi", "Fastivskyi", "Buchanskyi"],
+			"Kyiv": ["Kyiv", "Bilotserkivskyi", "Boryspilskyi", "Brovarskyi", "Vyshhorodskyi", "Obukhivskyi", "Fastivskyi", "Buchanskyi"],
 			"Vinnytsia": ["Vinnytsia", "Haysynskyi", "Zhmerynskyi", "Mogilev-Podilskyi", "Tulchynskyi", "Khmilnytskyi"],
 			"Dnipro": ["Dnipro", "Kamiansky", "Kryvyi Rih", "Nikopol", "Novomoskovskiy", "Pavlograd", "Synelnykivskyi"],
 			"Donetsk": ["Donetsk", "Bakhmut", "Volnovasky", "Kramatorsk", "Mariupol", "Pokrovsky", "Horliv", "Kalmius"],
@@ -34,14 +34,16 @@ class DistrictSelector {
 		this.deliverySelect = document.getElementById(this.deliverySelectId);
 		this.ccExpirationInput = document.getElementById('cc-expiration');
 
-		this.citySelect.addEventListener('change', this.updateDistricts.bind(this));
-		this.deliverySelect.addEventListener('change', this.updateDeliveryDetails.bind(this));
-		this.updateCityOptions();
+		if (this.citySelect && this.districtSelect && this.deliverySelect) {
+			this.citySelect.addEventListener('change', this.updateDistricts.bind(this));
+			this.deliverySelect.addEventListener('change', this.updateDeliveryDetails.bind(this));
+			this.updateCityOptions();
 
-		this.citySelect.addEventListener('change', this.checkCustomOption.bind(this));
-		this.districtSelect.addEventListener('change', this.checkCustomOption.bind(this));
+			this.citySelect.addEventListener('change', this.checkCustomOption.bind(this));
+			this.districtSelect.addEventListener('change', this.checkCustomOption.bind(this));
 
-		this.ccExpirationInput.addEventListener('input', this.addSlash.bind(this));
+			this.ccExpirationInput.addEventListener('input', this.addSlash.bind(this));
+		}
 	}
 
 	updateCityOptions() {
@@ -61,9 +63,9 @@ class DistrictSelector {
 
 	updateDistricts() {
 		const selectedCity = this.citySelect.value;
-	
+
 		this.districtSelect.innerHTML = '';
-	
+
 		if (selectedCity === '') {
 			const defaultOption = document.createElement('option');
 			defaultOption.value = '';
@@ -71,20 +73,20 @@ class DistrictSelector {
 			this.districtSelect.add(defaultOption);
 			return;
 		}
-	
+
 		let districts = this.districtsByCity[selectedCity];
-	
+
 		if (selectedCity === 'Other') {
-			districts = ['Other']; // Додати варіант "Other" до поля District
+			districts = ['Other']; 
 		}
-	
+
 		districts.forEach((district) => {
 			const option = document.createElement('option');
 			option.text = district;
 			this.districtSelect.add(option);
 		});
 	}
-	
+
 
 	checkCustomOption() {
 		if (
@@ -197,15 +199,9 @@ class DistrictSelector {
 		const input = event.target;
 		const trimmedValue = input.value.replace(/\s/g, '');
 		const newValue = trimmedValue.replace(/(\d{2})(\d{0,2})$/, '$1/$2');
-	 
-		input.value = newValue.slice(0, 5); // Обмежуємо довжину рядка до 5 символів (наприклад, 11/22)
-	 }
-	 
-	
-	 
-	 
 
+		input.value = newValue.slice(0, 5);
+	}
 }
-
 
 export default DistrictSelector;
