@@ -3,20 +3,26 @@ export class Counter {
 		this.buyCountElement = document.getElementById('buyCount');
 		this.wishlistCountElement = document.getElementById('wishlistCount');
 		this.cartIcon = document.querySelector('.buy');
+		this.cartItemList = document.getElementById('cartItemList');
 
-		this.buyCount = parseInt(localStorage.getItem('buyCount')) || 0; //why?
-		this.wishlistCount = parseInt(localStorage.getItem('wishlistCount')) || 0; //why?
+		this.buyCount = parseInt(localStorage.getItem('buyCount')) || 0;
+		this.wishlistCount = parseInt(localStorage.getItem('wishlistCount')) || 0;
 
 		this.updateCount = this.updateCount.bind(this);
 
-		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount'); //why?
-		this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount'); //why?
+		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
+		this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
 		this.updateLastItems();
+		
+
+
 
 		document.addEventListener('click', this.handleProductBuyClick.bind(this));
 		document.addEventListener('click', this.handleWishlistClick.bind(this));
 		document.addEventListener('click', this.handleQuantityClick.bind(this));
 		document.addEventListener('click', this.handleRemoveItemClick.bind(this));
+
+		this.fillCheckoutForm();
 	}
 
 	updateCount(element, count, key) {
@@ -110,6 +116,52 @@ export class Counter {
 		this.updateTotalPrice();
 	}
 
+	
+	fillCheckoutForm() {
+		const cartItemCount = document.getElementById('copy_cart-count');
+		const cartItems = JSON.parse(localStorage.getItem('lastItems')) || [];
+
+		cartItemCount.textContent = cartItems.length;
+
+		const cartItemList = document.getElementById('cartItemList');
+		cartItemList.innerHTML = '';
+
+		let totalPrice = 0;
+
+		cartItems.forEach((item) => {
+			const listItem = document.createElement('li');
+			listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'lh-condensed');
+
+			const itemDetails = document.createElement('div');
+
+			const itemName = document.createElement('h6');
+			itemName.classList.add('my-0', 'copy_name');
+			itemName.textContent = item.title;
+			itemDetails.appendChild(itemName);
+
+			const itemQuantity = document.createElement('small');
+			itemQuantity.classList.add('text-muted', 'copy_quantity');
+			itemQuantity.innerHTML = `x<span>${item.quantity || 1}</span>`;
+			itemDetails.appendChild(itemQuantity);
+
+			listItem.appendChild(itemDetails);
+
+			const itemPrice = document.createElement('span');
+			itemPrice.classList.add('text-muted', 'copy_price');
+			itemPrice.textContent = item.price;
+			listItem.appendChild(itemPrice);
+
+			cartItemList.appendChild(listItem);
+
+			const priceValue = parseFloat(item.price.replace('$', ''));
+			totalPrice += priceValue * (item.quantity || 1);
+		});
+
+		const totalElement = document.querySelector('.copy_total');
+		totalElement.textContent = `$${totalPrice.toFixed(2)}`;
+	}
+
+
 	handleProductBuyClick(event) {
 		if (event.target.matches('.product-buy-actions .btn-buy--js') && event.target.closest('.btn-buy--js')) {
 			this.buyCount++;
@@ -172,7 +224,7 @@ export class Counter {
 
 	handleRemoveItemClick(event) {
 		if (event.target.classList.contains('remove-icon')) {
-const itemIndex = event.target.closest('.last-item').getAttribute('data-index');
+			const itemIndex = event.target.closest('.last-item').getAttribute('data-index');
 			const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
 
 			lastItems.splice(itemIndex, 1);
