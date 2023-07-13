@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 window.addEventListener('load', () => {
-	fetchProducts(productsLink, '.products');
-	fetchProducts(randomProductsLink, '.random__products');
-	fetchProducts(randomSaleLink, '.sale__products');
+	fetchProducts(productsLink, '.cards');
+	fetchProducts(randomProductsLink, '.random__cards');
+	fetchProducts(randomSaleLink, '.sale__cards');
 });
 
 new Counter();

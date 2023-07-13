@@ -4,13 +4,13 @@ export class Counter {
 		this.wishlistCountElement = document.getElementById('wishlistCount');
 		this.cartIcon = document.querySelector('.buy');
 
-		this.buyCount = parseInt(localStorage.getItem('buyCount')) || 0;
-		this.wishlistCount = parseInt(localStorage.getItem('wishlistCount')) || 0;
+		this.buyCount = parseInt(localStorage.getItem('buyCount')) || 0; //why?
+		this.wishlistCount = parseInt(localStorage.getItem('wishlistCount')) || 0; //why?
 
 		this.updateCount = this.updateCount.bind(this);
 
-		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
-		this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
+		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount'); //why?
+		this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount'); //why?
 		this.updateLastItems();
 
 		document.addEventListener('click', this.handleProductBuyClick.bind(this));
@@ -111,7 +111,7 @@ export class Counter {
 	}
 
 	handleProductBuyClick(event) {
-		if (event.target.matches('.product-buy-actions .my-btn') && event.target.closest('.my-btn')) {
+		if (event.target.matches('.product-buy-actions .btn-buy--js') && event.target.closest('.btn-buy--js')) {
 			this.buyCount++;
 			this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 

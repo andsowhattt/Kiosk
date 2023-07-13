@@ -19,6 +19,11 @@
 					color: white;
 				}
 			}
+			&__info-email,
+			&__info-text {
+				color: white;
+				text-decoration: none;
+			}
 		}
 	}
 }
