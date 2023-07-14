@@ -22,32 +22,19 @@
 					<span class="badge badge-secondary badge-pill" id="copy_cart-count"></span>
 				</h4>
 				<ul class="list-group mb-3" id="cartItemList">
-					<li class="list-group-item d-flex justify-content-between lh-condensed">
-						<div>
-							<h6 class="my-0 copy_name"></h6>
-							<small class="text-muted">х<span class="copy_quantity"></span></small>
-						</div>
-						<span class="text-muted copy_price"></span>
-					</li>
-					<li class="list-group-item d-flex justify-content-between lh-condensed">
-						<div>
-							<h6 class="my-0 copy_name"></h6>
-							<small class="text-muted">х<span class="copy_quantity"></span></small>
-						</div>
-						<span class="text-muted copy_price"></span>
-					</li>
-					<li class="list-group-item d-flex justify-content-between bg-light">
-						<div class="text-success">
-							<h6 class="my-0">Promo code</h6>
-							<small>EXAMPLECODE</small>
-						</div>
-						<span class="text-success">-$5</span>
-					</li>
-					<li class="list-group-item d-flex justify-content-between">
-						<span>Total (USD)</span>
-						<strong class="copy_total"></strong>
-					</li>
+					<!-- Динамічно додаємо елементи сюди з JS -->
 				</ul>
+				<li class="list-group-item d-flex justify-content-between bg-light">
+					<div class="text-success">
+						<h6 class="my-0">Promo code</h6>
+						<small>EXAMPLECODE</small>
+					</div>
+					<span class="text-success">-$5</span>
+				</li>
+				<li class="list-group-item d-flex justify-content-between">
+					<span>Total (USD)</span>
+					<strong class="copy_total"></strong>
+				</li>
 				<form class="card p-2">
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Promo code">
@@ -57,6 +44,9 @@
 					</div>
 				</form>
 			</div>
+
+			
+
 			<div class="col-md-8 order-md-1">
 				<h4 class="mb-3">Billing address</h4>
 				<form class="needs-validation" novalidate>
@@ -196,7 +186,7 @@
 								Expiration date required. Please use the format MM/YY.
 							</div>
 						</div>
-						
+
 						<div class="col-md-3 mb-3">
 							<label for="cc-cvv">CVV</label>
 							<input type="text" class="form-control" id="cc-cvv" placeholder="" pattern="\d{3}" required>

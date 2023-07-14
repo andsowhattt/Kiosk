@@ -13,7 +13,8 @@ export class Counter {
 		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 		this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
 		this.updateLastItems();
-		
+		this
+
 
 
 
@@ -21,8 +22,6 @@ export class Counter {
 		document.addEventListener('click', this.handleWishlistClick.bind(this));
 		document.addEventListener('click', this.handleQuantityClick.bind(this));
 		document.addEventListener('click', this.handleRemoveItemClick.bind(this));
-
-		this.fillCheckoutForm();
 	}
 
 	updateCount(element, count, key) {
@@ -58,107 +57,87 @@ export class Counter {
 
 	updateLastItems() {
 		const lastItemsContainer = document.querySelector('.last-items-list');
-		const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
-
-		lastItemsContainer.innerHTML = '';
-
-		lastItems.forEach((item, index) => {
-			const div = document.createElement('div');
-			div.classList.add('last-item');
-
-			const img = document.createElement('img');
-			img.src = item.image;
-			img.alt = item.title;
-			img.classList.add('last-item-image');
-			div.appendChild(img);
-
-			const itemDetails = document.createElement('div');
-			itemDetails.classList.add('last-item-details');
-
-			const h6 = document.createElement('h6');
-			h6.textContent = item.title;
-			itemDetails.appendChild(h6);
-
-			const price = parseFloat(item.price.replace('$', ''));
-
-			const quantityWrapper = document.createElement('div');
-			quantityWrapper.classList.add('quantity-wrapper');
-
-			const minusIcon = this.createIconElement('fa-circle-minus', 'quantity-icon');
-			quantityWrapper.appendChild(minusIcon);
-
-			const quantity = document.createElement('span');
-			quantity.classList.add('quantity');
-			quantity.textContent = item.quantity || '1'; // Додали оновлення кількості товару
-			quantityWrapper.appendChild(quantity);
-
-			const plusIcon = this.createIconElement('fa-circle-plus', 'quantity-icon');
-			quantityWrapper.appendChild(plusIcon);
-
-			const removeIcon = this.createIconElement('fa-trash', 'remove-icon');
-			quantityWrapper.appendChild(removeIcon);
-
-			itemDetails.appendChild(quantityWrapper);
-
-			const totalPrice = document.createElement('span');
-			totalPrice.classList.add('total-price');
-			totalPrice.textContent = `$${price * (item.quantity || 1)}`; // Оновлено обчислення загальної ціни
-			itemDetails.appendChild(totalPrice);
-
-			div.appendChild(itemDetails);
-			lastItemsContainer.appendChild(div);
-
-			div.setAttribute('data-index', index);
-		});
-
-		this.buyCount = lastItems.reduce((total, item) => total + (item.quantity || 1), 0); // Оновлено лічильник buyCount
-		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
-		this.updateTotalPrice();
-	}
-
-	
-	fillCheckoutForm() {
-		const cartItemCount = document.getElementById('copy_cart-count');
-		const cartItems = JSON.parse(localStorage.getItem('lastItems')) || [];
-
-		cartItemCount.textContent = cartItems.length;
-
 		const cartItemList = document.getElementById('cartItemList');
-		cartItemList.innerHTML = '';
+		const copyCartCount = document.getElementById('copy_cart-count');
+		const copyTotalElement = document.querySelector('.copy_total');
 
-		let totalPrice = 0;
+		if (lastItemsContainer) {
+			lastItemsContainer.innerHTML = '';
 
-		cartItems.forEach((item) => {
-			const listItem = document.createElement('li');
-			listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'lh-condensed');
+			const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
 
-			const itemDetails = document.createElement('div');
+			lastItems.forEach((item, index) => {
+				const div = document.createElement('div');
+				div.classList.add('last-item');
 
-			const itemName = document.createElement('h6');
-			itemName.classList.add('my-0', 'copy_name');
-			itemName.textContent = item.title;
-			itemDetails.appendChild(itemName);
+				const img = document.createElement('img');
+				img.src = item.image;
+				img.alt = item.title;
+				img.classList.add('last-item-image');
+				div.appendChild(img);
 
-			const itemQuantity = document.createElement('small');
-			itemQuantity.classList.add('text-muted', 'copy_quantity');
-			itemQuantity.innerHTML = `x<span>${item.quantity || 1}</span>`;
-			itemDetails.appendChild(itemQuantity);
+				const itemDetails = document.createElement('div');
+				itemDetails.classList.add('last-item-details');
 
-			listItem.appendChild(itemDetails);
+				const h6 = document.createElement('h6');
+				h6.textContent = item.title;
+				itemDetails.appendChild(h6);
 
-			const itemPrice = document.createElement('span');
-			itemPrice.classList.add('text-muted', 'copy_price');
-			itemPrice.textContent = item.price;
-			listItem.appendChild(itemPrice);
+				const price = parseFloat(item.price.replace('$', ''));
 
-			cartItemList.appendChild(listItem);
+				const quantityWrapper = document.createElement('div');
+				quantityWrapper.classList.add('quantity-wrapper');
 
-			const priceValue = parseFloat(item.price.replace('$', ''));
-			totalPrice += priceValue * (item.quantity || 1);
-		});
+				const minusIcon = this.createIconElement('fa-circle-minus', 'quantity-icon');
+				quantityWrapper.appendChild(minusIcon);
 
-		const totalElement = document.querySelector('.copy_total');
-		totalElement.textContent = `$${totalPrice.toFixed(2)}`;
+				const quantity = document.createElement('span');
+				quantity.classList.add('quantity');
+				quantity.textContent = item.quantity || '1';
+				quantityWrapper.appendChild(quantity);
+
+				const plusIcon = this.createIconElement('fa-circle-plus', 'quantity-icon');
+				quantityWrapper.appendChild(plusIcon);
+
+				const removeIcon = this.createIconElement('fa-trash', 'remove-icon');
+				quantityWrapper.appendChild(removeIcon);
+
+				itemDetails.appendChild(quantityWrapper);
+
+				const totalPrice = document.createElement('span');
+				totalPrice.classList.add('total-price');
+				totalPrice.textContent = `$${price * (item.quantity || 1)}`;
+				itemDetails.appendChild(totalPrice);
+
+				div.appendChild(itemDetails);
+				lastItemsContainer.appendChild(div);
+
+				div.setAttribute('data-index', index);
+			});
+
+			if (cartItemList) {
+				cartItemList.innerHTML = lastItems
+					.map(
+						item =>
+							`<li class="list-group-item d-flex justify-content-between lh-condensed">
+								<div>
+									<h6 class="my-0">${item.title}</h6>
+									<small class="text-muted">х<span class="copy_quantity">${item.quantity || 1}</span></small>
+								</div>
+								<span class="text-muted copy_price">${item.price}</span>
+							</li>`
+					)
+					.join('');
+			}
+
+			if (copyCartCount) {
+				copyCartCount.textContent = lastItems.length;
+			}
+
+			if (copyTotalElement) {
+				copyTotalElement.textContent = `$${this.calculateTotalPrice()}`;
+			}
+		}
 	}
 
 
