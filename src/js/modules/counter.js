@@ -13,15 +13,13 @@ export class Counter {
 		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 		this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
 		this.updateLastItems();
-		this
-
-
-
 
 		document.addEventListener('click', this.handleProductBuyClick.bind(this));
 		document.addEventListener('click', this.handleWishlistClick.bind(this));
 		document.addEventListener('click', this.handleQuantityClick.bind(this));
 		document.addEventListener('click', this.handleRemoveItemClick.bind(this));
+		
+		
 	}
 
 	updateCount(element, count, key) {
@@ -34,7 +32,9 @@ export class Counter {
 			this.cartIcon.classList.remove('fa-beat');
 		}
 
-		this.updateTotalPrice();
+		if (key === 'buyCount') {
+			this.updateTotalPrice();
+		}
 	}
 
 	updateTotalPrice() {
@@ -137,6 +137,9 @@ export class Counter {
 			if (copyTotalElement) {
 				copyTotalElement.textContent = `$${this.calculateTotalPrice()}`;
 			}
+
+			// Оновлення загальної суми після оновлення елементів
+			this.updateTotalPrice();
 		}
 	}
 
@@ -228,6 +231,7 @@ export class Counter {
 			this.updateTotalPrice();
 		}
 	}
+
 
 	createIconElement(iconClass, iconWrapperClass) {
 		const icon = document.createElement('i');
