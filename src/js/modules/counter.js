@@ -4,11 +4,15 @@ export class Counter {
 		this.wishlistCountElement = document.getElementById('wishlistCount');
 		this.cartIcon = document.querySelector('.buy');
 		this.cartItemList = document.getElementById('cartItemList');
+		this.checkoutButton = document.querySelector('.checkout-button--js');
 
 		this.buyCount = parseInt(localStorage.getItem('buyCount')) || 0;
 		this.wishlistCount = parseInt(localStorage.getItem('wishlistCount')) || 0;
 
 		this.updateCount = this.updateCount.bind(this);
+		this.cartIcon.addEventListener('click', this.handleCartClose.bind(this));
+
+
 
 		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 		this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
@@ -18,8 +22,8 @@ export class Counter {
 		document.addEventListener('click', this.handleWishlistClick.bind(this));
 		document.addEventListener('click', this.handleQuantityClick.bind(this));
 		document.addEventListener('click', this.handleRemoveItemClick.bind(this));
-		
-		
+
+		this.checkoutButton.addEventListener('click', this.handleCheckoutClick.bind(this));
 	}
 
 	updateCount(element, count, key) {
@@ -55,11 +59,26 @@ export class Counter {
 		return totalPrice.toFixed(2);
 	}
 
+	updateCartInformation() {
+		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
+		this.updateLastItems();
+	}
+
+
 	updateLastItems() {
 		const lastItemsContainer = document.querySelector('.last-items-list');
 		const cartItemList = document.getElementById('cartItemList');
 		const copyCartCount = document.getElementById('copy_cart-count');
 		const copyTotalElement = document.querySelector('.copy_total');
+
+		document.addEventListener('click', event => {
+			if (event.target.classList.contains('fa-circle-plus') || event.target.classList.contains('fa-circle-minus')) {
+				const itemIndex = event.target.closest('.last-item').getAttribute('data-index');
+				const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
+				lastItems[itemIndex].quantity = parseInt(event.target.parentNode.querySelector('.quantity').textContent);
+				localStorage.setItem('lastItems', JSON.stringify(lastItems));
+			}
+		});
 
 		if (lastItemsContainer) {
 			lastItemsContainer.innerHTML = '';
@@ -138,7 +157,6 @@ export class Counter {
 				copyTotalElement.textContent = `$${this.calculateTotalPrice()}`;
 			}
 
-			// Оновлення загальної суми після оновлення елементів
 			this.updateTotalPrice();
 		}
 	}
@@ -155,7 +173,7 @@ export class Counter {
 
 			const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
 
-			lastItems.unshift({ title: productTitle, price: productPrice, image: productImage, quantity: 1 }); // Додано збереження кількості товару
+			lastItems.unshift({ title: productTitle, price: productPrice, image: productImage, quantity: 1 });
 
 			localStorage.setItem('lastItems', JSON.stringify(lastItems));
 			this.updateLastItems();
@@ -175,6 +193,8 @@ export class Counter {
 		} else if (event.target.classList.contains('fa-circle-minus')) {
 			this.handleQuantityChange(event, -1);
 		}
+
+		this.updateCartInformation();
 	}
 
 	handleQuantityChange(event, increment) {
@@ -192,17 +212,20 @@ export class Counter {
 
 			this.updateTotalPrice();
 
-			// Оновлення лічильника buyCount на підставі зміненої кількості товару
 			const itemIndex = event.target.closest('.last-item').getAttribute('data-index');
 			const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
 			lastItems[itemIndex].quantity = newQuantity;
 			localStorage.setItem('lastItems', JSON.stringify(lastItems));
 
-			// Оновлення лічильника buyCount після зміни кількості товару в корзині
 			this.buyCount = lastItems.reduce((total, item) => total + (item.quantity || 1), 0);
 			this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 		}
 	}
+
+	handleCartClose() {
+		this.updateLastItems();
+	}
+
 
 	handleRemoveItemClick(event) {
 		if (event.target.classList.contains('remove-icon')) {
@@ -212,7 +235,6 @@ export class Counter {
 			lastItems.splice(itemIndex, 1);
 			localStorage.setItem('lastItems', JSON.stringify(lastItems));
 
-			// Оновлення лічильника buyCount
 			this.buyCount = lastItems.reduce((total, item) => total + (item.quantity || 1), 0);
 			this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 
@@ -232,6 +254,15 @@ export class Counter {
 		}
 	}
 
+	handleCheckoutClick(event) {
+		const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
+		if (lastItems.length === 0) {
+			event.preventDefault(); 
+			alert('The shopping cart is empty. Please add products to the cart to complete the order.');
+
+			window.location.href = '../shop.html';
+		}
+	}
 
 	createIconElement(iconClass, iconWrapperClass) {
 		const icon = document.createElement('i');

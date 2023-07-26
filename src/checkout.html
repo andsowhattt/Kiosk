@@ -24,6 +24,10 @@
 				<ul class="list-group mb-3" id="cartItemList">
 					<!-- Динамічно додаємо елементи сюди з JS -->
 				</ul>
+				<li class="list-group-item d-flex justify-content-between">
+					<span>Cost (USD)</span>
+					<strong class="copy_total"></strong>
+				</li>
 				<li class="list-group-item d-flex justify-content-between bg-light">
 					<div>
 						<h6 class="my-0">Promo code</h6>
@@ -33,7 +37,7 @@
 				</li>
 				<li class="list-group-item d-flex justify-content-between">
 					<span>Total (USD)</span>
-					<strong class="copy_total"></strong>
+					<strong class="promo__total--js"></strong>
 				</li>
 				<form class="card p-2">
 					<div class="input-group">
@@ -44,8 +48,8 @@
 					</div>
 				</form>
 				<hr class="mb-2">
-				<button id="editOrderButton" class="button btn-block" data-toggle="modal" data-target="#cartModal">Edit order</button>
-
+				<button id="editOrderButton" class="button btn-block" data-toggle="modal" data-target="#cartModal">Edit
+					order</button>
 			</div>
 
 			<div class="col-md-8 order-md-1">
