@@ -26,6 +26,8 @@ export class Counter {
 		this.checkoutButton.addEventListener('click', this.handleCheckoutClick.bind(this));
 	}
 
+	
+
 	updateCount(element, count, key) {
 		element.textContent = count > 0 ? count : '';
 		localStorage.setItem(key, count);
@@ -43,9 +45,17 @@ export class Counter {
 
 	updateTotalPrice() {
 		const totalElement = document.getElementById('totalPrice');
+		const promoTotalElement = document.querySelector('.promo__total--js');
+	 
 		const totalPrice = this.calculateTotalPrice();
 		totalElement.textContent = `$${totalPrice}`;
-	}
+	 
+		if (promoTotalElement) {
+		  const totalWithDiscount = (parseFloat(totalPrice) - 5).toFixed(2);
+		  promoTotalElement.textContent = `$${totalWithDiscount}`;
+		}
+	 }
+	 
 
 	calculateTotalPrice() {
 		const totalPriceElements = document.querySelectorAll('.total-price');
@@ -240,14 +250,10 @@ export class Counter {
 
 			this.updateLastItems();
 
+			// Check if the cart is empty
 			if (lastItems.length === 0) {
-				const cartModal = document.getElementById('cartModal');
-				const modalBackdrop = document.querySelector('.modal-backdrop');
-
-				cartModal.classList.remove('show');
-				modalBackdrop.parentNode.removeChild(modalBackdrop);
-
-				cartModal.style.display = 'none';
+				// Redirect to shop.html when the cart is empty
+				window.location.href = 'shop.html';
 			}
 
 			this.updateTotalPrice();
@@ -257,7 +263,7 @@ export class Counter {
 	handleCheckoutClick(event) {
 		const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
 		if (lastItems.length === 0) {
-			event.preventDefault(); 
+			event.preventDefault();
 			alert('The shopping cart is empty. Please add products to the cart to complete the order.');
 
 			window.location.href = '../shop.html';
