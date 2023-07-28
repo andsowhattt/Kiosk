@@ -5,6 +5,7 @@ import { Counter } from './modules/counter.js';
 import DistrictSelector from './modules/checkout.js';
 import { validateForm } from './modules/valid.js';
 import { sendMessage } from './modules/email.js';
+import { renderWishlistItems } from './modules/wishlist.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -49,5 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             sendMessage();
         });
+	}
+	
+	const wishlistContainer = document.querySelector('.wishlist-container');
+    if (wishlistContainer) {
+        renderWishlistItems(wishlistContainer);
     }
 });
