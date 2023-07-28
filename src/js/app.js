@@ -4,6 +4,8 @@ import { productsLink, randomProductsLink, randomSaleLink, fetchProducts } from 
 import { Counter } from './modules/counter.js';
 import DistrictSelector from './modules/checkout.js';
 import { validateForm } from './modules/valid.js';
+import { sendMessage } from './modules/email.js';
+
 
 document.addEventListener('DOMContentLoaded', () => {
 	// Додати відстеження подій кліків на кнопку "BUY"
@@ -40,4 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	new Counter();
 
 	carouselSwitcher();
+
+	const form = document.querySelector('.message__form--js');
+    if (form) {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            sendMessage();
+        });
+    }
 });

@@ -1,23 +1,24 @@
 <div class="message message-form">
 	<h3 class="message__title">Leave a Message</h3>
-	<form>
+	<form class="message__form--js">
 		<div class="message__input form-group">
 			<label for="name">Name:</label>
-			<input type="text" class="message__input-form form-control" id="name" placeholder="Enter your name" required>
+			<input type="text" class="message__input-form form-control" name="name" placeholder="Enter your name" required>
 		</div>
 		<div class="message__input form-group">
 			<label for="email">Email:</label>
-			<input type="email" class="message__input-form form-control" id="email" placeholder="Enter your email" required>
+			<input type="email" class="message__input-form form-control" name="email" placeholder="Enter your email" required>
 		</div>
 		<div class="message__input form-group">
 			<label for="subject">Subject:</label>
-			<input type="text" class="message__input-form form-control" id="subject" placeholder="Enter the subject" required>
+			<input type="text" class="message__input-form form-control" name="subject" placeholder="Enter the subject" required>
 		</div>
 		<div class="message__input form-group">
 			<label for="message">Write your message:</label>
-			<textarea class="message__input-form form-control" id="message" rows="5" placeholder="Write your message"
+			<textarea class="message__input-form form-control" name="message" rows="5" placeholder="Write your message"
 				required></textarea>
 		</div>
 		<button type="submit" class="message__input-btn button">Submit</button>
 	</form>
+	<p class="email__security">* We do not transfer your data to third parties.</p>
 </div>
