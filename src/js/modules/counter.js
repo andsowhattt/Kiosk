@@ -22,6 +22,7 @@ export class Counter {
 		document.addEventListener('click', this.handleWishlistClick.bind(this));
 		document.addEventListener('click', this.handleQuantityClick.bind(this));
 		document.addEventListener('click', this.handleRemoveItemClick.bind(this));
+		document.addEventListener('click', this.handleAddButtonClick.bind(this));
 
 		this.checkoutButton.addEventListener('click', this.handleCheckoutClick.bind(this));
 	}
@@ -203,6 +204,17 @@ export class Counter {
 			lastItems.unshift({ title: productTitle, price: productPrice, image: productImage, quantity: 1 });
 
 			localStorage.setItem('lastItems', JSON.stringify(lastItems));
+			this.updateLastItems();
+		}
+	}
+
+	handleAddButtonClick(event) {
+		if (event.target.matches('.btn-add--js')) {
+			this.buyCount++;
+			this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
+
+			// Тут можна додати логіку, яка необхідна при кліці на кнопку з класом .btn-add--js
+
 			this.updateLastItems();
 		}
 	}
