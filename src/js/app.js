@@ -45,15 +45,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	carouselSwitcher();
 
 	const form = document.querySelector('.message__form--js');
-    if (form) {
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-            sendMessage();
-        });
+	if (form) {
+		form.addEventListener('submit', function (event) {
+			event.preventDefault();
+			sendMessage();
+		});
 	}
-	
+
 	const wishlistContainer = document.querySelector('.wishlist-container');
-    if (wishlistContainer) {
-        renderWishlistItems(wishlistContainer);
-    }
+	if (wishlistContainer) {
+		renderWishlistItems(wishlistContainer);
+	}
 });

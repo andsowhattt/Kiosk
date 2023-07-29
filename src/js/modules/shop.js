@@ -28,7 +28,7 @@ export function renderProducts(products, containerClass) {
 				<div class="product-actions">
 				<div class="product-buy-actions">
 					<a href="#" class="btn card-btn btn-buy--js"><i class="fas fa-shopping-cart enlarged-icon"></i>Buy</a>
-					<a href="#" class="btn btn-secondary"><i class="fas fa-heart enlarged-icon"></i>Wishlist this</a>
+					<a href="#" class="btn btn-secondary btn-wish--js"><i class="fas fa-heart enlarged-icon"></i>Wishlist this</a>
             </div>
             <div class="products-details">
 					<a href="shop-cart.html" class="btn btn-dark">View Details</a>

@@ -26,53 +26,53 @@ export class Counter {
 		this.checkoutButton.addEventListener('click', this.handleCheckoutClick.bind(this));
 	}
 
-	
+
 
 	updateCount(element, count, key) {
 		element.textContent = count > 0 ? count : '';
 		localStorage.setItem(key, count);
-  
+
 		if (count > 0 && key === 'buyCount') {
-		  this.cartIcon.classList.add('fa-beat');
+			this.cartIcon.classList.add('fa-beat');
 		} else {
-		  this.cartIcon.classList.remove('fa-beat');
+			this.cartIcon.classList.remove('fa-beat');
 		}
-  
+
 		if (key === 'buyCount') {
-		  this.updateTotalPrice();
+			this.updateTotalPrice();
 		}
-  
+
 		// Update wishlist count separately
 		if (key === 'wishlistCount') {
-		  this.updateWishlistCount();
+			this.updateWishlistCount();
 		}
 	}
-	
+
 	updateWishlistCount() {
 		const wishlistIcon = document.querySelector('.wishlist');
 		if (wishlistIcon) {
-		  if (this.wishlistCount > 0) {
-			 wishlistIcon.textContent = this.wishlistCount;
-		  } else {
-			 wishlistIcon.textContent = '';
-		  }
+			if (this.wishlistCount > 0) {
+				wishlistIcon.textContent = this.wishlistCount;
+			} else {
+				wishlistIcon.textContent = '';
+			}
 		}
-	 }
-	 
+	}
+
 
 	updateTotalPrice() {
 		const totalElement = document.getElementById('totalPrice');
 		const promoTotalElement = document.querySelector('.promo__total--js');
-	 
+
 		const totalPrice = this.calculateTotalPrice();
 		totalElement.textContent = `$${totalPrice}`;
-	 
+
 		if (promoTotalElement) {
-		  const totalWithDiscount = (parseFloat(totalPrice) - 5).toFixed(2);
-		  promoTotalElement.textContent = `$${totalWithDiscount}`;
+			const totalWithDiscount = (parseFloat(totalPrice) - 5).toFixed(2);
+			promoTotalElement.textContent = `$${totalWithDiscount}`;
 		}
-	 }
-	 
+	}
+
 
 	calculateTotalPrice() {
 		const totalPriceElements = document.querySelectorAll('.total-price');
@@ -208,26 +208,26 @@ export class Counter {
 	}
 
 	handleWishlistClick(event) {
-		if (event.target.matches('.product-buy-actions .btn-secondary')) {
-			 this.wishlistCount++;
-			 this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
-  
-			 // Отримати дані про обраний товар
-			 const productTitle = event.target.closest('.card-body').querySelector('.card-title').textContent;
-			 const productPrice = event.target.closest('.card-body').querySelector('.card-text').textContent;
-			 const productImage = event.target.closest('.card').querySelector('.card-img-top').src;
-  
-			 // Отримати існуючі обрані товари з локального сховища або створити новий масив
-			 const wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
-  
-			 // Додати обраний товар до масиву обраних товарів
-			 wishlistItems.push({ title: productTitle, price: productPrice, image: productImage });
-  
-			 // Зберегти оновлений масив обраних товарів у локальне сховище
-			 localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
+		if (event.target.matches('.product-buy-actions .btn-wish--js')) {
+			this.wishlistCount++;
+			this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
+
+			// Отримати дані про обраний товар
+			const productTitle = event.target.closest('.card-body').querySelector('.card-title').textContent;
+			const productPrice = event.target.closest('.card-body').querySelector('.card-text').textContent;
+			const productImage = event.target.closest('.card').querySelector('.card-img-top').src;
+
+			// Отримати існуючі обрані товари з локального сховища або створити новий масив
+			const wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
+
+			// Додати обраний товар до масиву обраних товарів
+			wishlistItems.push({ title: productTitle, price: productPrice, image: productImage });
+
+			// Зберегти оновлений масив обраних товарів у локальне сховище
+			localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
 		}
-  }
-  
+	}
+
 
 	handleQuantityClick(event) {
 		if (event.target.classList.contains('fa-circle-plus')) {
@@ -308,5 +308,5 @@ export class Counter {
 		return icon;
 	}
 
-	
+
 }
