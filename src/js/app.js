@@ -9,14 +9,6 @@ import { renderWishlistItems } from './modules/wishlist.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
-	// Додати відстеження подій кліків на кнопку "BUY"
-	const buyButton = document.querySelector('.btn-buy--js');
-	if (buyButton) {
-		buyButton.addEventListener('click', (event) => {
-			// Код, який виконується при кліку на кнопку "BUY"
-			// Ви можете залишити пустим, якщо не потрібно виконувати додаткові дії
-		});
-	}
 
 	// Перевірка на наявність контейнера ".cards" на головній сторінці
 	const cardsContainer = document.querySelector('.cards');

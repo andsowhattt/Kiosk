@@ -1,3 +1,22 @@
+// Отримання іконки вішлісту
+const wishlistIcon = document.querySelector('.like');
+
+// Обробник кліку на іконку вішлісту
+wishlistIcon.addEventListener('click', (event) => {
+	event.preventDefault(); // Забороняємо перехід за посиланням
+
+	// Отримання обраних товарів з локального сховища
+	const wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
+
+	if (wishlistItems.length === 0) {
+		// Якщо вішліст порожній, показати алерт "Your wishlist is empty."
+		alert('Your wishlist is empty.');
+	} else {
+		// Якщо є обрані товари, перейти на сторінку wishlist.html
+		window.location.href = "wishlist.html";
+	}
+});
+
 export function renderWishlistItems(container) {
 	// Отримати обрані товари з локального сховища
 	const wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
@@ -24,7 +43,6 @@ export function renderWishlistItems(container) {
 			</div>`;
 
 		container.appendChild(card);
-
 	});
 }
 
@@ -95,9 +113,14 @@ function removeFromWishlist(title) {
 	const wishlistCountElement = document.getElementById('wishlistCount');
 	wishlistCountElement.textContent = updatedWishlistCount;
 
-	// Перевідкрити список бажань
-	const wishlistContainer = document.querySelector('.wishlist-container');
-	if (wishlistContainer) {
-		renderWishlistItems(wishlistContainer);
+	// Перевірити, чи потрібно перерендерити список бажань на сторінці wishlist.html
+	if (window.location.href.includes("wishlist.html")) {
+		renderWishlistItems(document.querySelector('.wishlist-container'));
+	}
+
+	// Перевірка на сторінці wishlist.html і перехід на main.html, якщо вішліст порожній
+	if (window.location.href.includes("wishlist.html") && wishlistItems.length === 0) {
+		// Якщо вішліст порожній, перейти на сторінку main.html
+		window.location.href = "main.html";
 	}
 }
