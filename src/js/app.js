@@ -1,6 +1,6 @@
 import './modules/toggler.js';
 import { carouselSwitcher } from './modules/carousel.js';
-import { productsLink, randomProductsLink, randomSaleLink, fetchProducts } from './modules/shop.js';
+import { productsLink, randomProductsLink, randomSaleLink, fetchProducts, hideLoadingOverlay } from './modules/shop.js';
 import { Counter } from './modules/counter.js';
 import DistrictSelector from './modules/checkout.js';
 import { validateForm } from './modules/valid.js';
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Перевірка на наявність контейнера ".cards" на головній сторінці
 	const cardsContainer = document.querySelector('.cards');
 	if (cardsContainer) {
-		fetchProducts(productsLink, '.cards');
+		fetchProducts(productsLink, '.cards').then(() => hideLoadingOverlay());
 	}
 
 	// Перевірка на наявність контейнера ".random__cards" на сторінці каталогу

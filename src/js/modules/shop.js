@@ -4,13 +4,24 @@ export const randomSaleLink = 'https://api.escuelajs.co/api/v1/products?offset=0
 
 export async function fetchProducts(link, containerClass) {
 	try {
-		const result = await fetch(link);
-		const data = await result.json();
-		renderProducts(data, containerClass);
+	  // Показати анімацію завантаження перед отриманням даних
+	  const loadingOverlay = document.createElement('div');
+	  loadingOverlay.classList.add('loading-overlay');
+	  const container = document.querySelector(containerClass);
+	  container.appendChild(loadingOverlay);
+ 
+	  const result = await fetch(link);
+	  const data = await result.json();
+ 
+	  // Після отримання даних, приховати анімацію завантаження
+	  container.removeChild(loadingOverlay);
+ 
+	  renderProducts(data, containerClass);
 	} catch (error) {
-		console.log('Error fetching data:', error);
+	  console.log('Error fetching data:', error);
 	}
-}
+ }
+ 
 
 export function renderProducts(products, containerClass) {
 	const container = document.querySelector(containerClass);
@@ -38,4 +49,11 @@ export function renderProducts(products, containerClass) {
       </div>`;
 		container.appendChild(card);
 	});
+}
+
+export function hideLoadingOverlay() {
+	const loadingOverlay = document.querySelector('.loading-overlay');
+	if (loadingOverlay) {
+		loadingOverlay.remove();
+	}
 }
