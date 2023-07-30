@@ -1,33 +1,56 @@
 export class Counter {
 	constructor() {
-		this.buyCountElement = document.getElementById('buyCount');
-		this.wishlistCountElement = document.getElementById('wishlistCount');
-		this.cartIcon = document.querySelector('.buy');
-		this.cartItemList = document.getElementById('cartItemList');
-		this.checkoutButton = document.querySelector('.checkout-button--js');
+		const {
+			buyCount,
+			wishlistCount,
+			cartIcon,
+			cartItemList,
+			checkoutButton,
+			buyCountElement,
+			wishlistCountElement,
+		} = this.getElements();
 
 		this.buyCount = parseInt(localStorage.getItem('buyCount')) || 0;
 		this.wishlistCount = parseInt(localStorage.getItem('wishlistCount')) || 0;
 
+		this.buyCountElement = buyCountElement;
+		this.wishlistCountElement = wishlistCountElement;
+		this.cartIcon = cartIcon;
+		this.cartItemList = cartItemList;
+		this.checkoutButton = checkoutButton;
+
 		this.updateCount = this.updateCount.bind(this);
 		this.cartIcon.addEventListener('click', this.handleCartClose.bind(this));
+		this.checkoutButton.addEventListener('click', this.handleCheckoutClick.bind(this));
 
+		this.init();
+	}
 
+	getElements() {
+		return {
+			buyCount: parseInt(localStorage.getItem('buyCount')) || 0,
+			wishlistCount: parseInt(localStorage.getItem('wishlistCount')) || 0,
+			cartIcon: document.querySelector('.buy'),
+			cartItemList: document.getElementById('cartItemList'),
+			checkoutButton: document.querySelector('.checkout-button--js'),
+			buyCountElement: document.getElementById('buyCount'),
+			wishlistCountElement: document.getElementById('wishlistCount'),
+		};
+	}
 
+	init() {
 		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 		this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
 		this.updateLastItems();
 
-		document.addEventListener('click', this.handleProductBuyClick.bind(this));
-		document.addEventListener('click', this.handleWishlistClick.bind(this));
-		document.addEventListener('click', this.handleQuantityClick.bind(this));
-		document.addEventListener('click', this.handleRemoveItemClick.bind(this));
-		document.addEventListener('click', this.handleAddButtonClick.bind(this));
-
-		this.checkoutButton.addEventListener('click', this.handleCheckoutClick.bind(this));
+		document.addEventListener('click', (event) => {
+			this.handleProductBuyClick(event);
+			this.handleWishlistClick(event);
+			this.handleQuantityClick(event);
+			this.handleRemoveItemClick(event);
+			this.handleAddButtonClick(event);
+		});
 	}
-
-
 
 	updateCount(element, count, key) {
 		element.textContent = count > 0 ? count : '';
@@ -43,7 +66,6 @@ export class Counter {
 			this.updateTotalPrice();
 		}
 
-		// Update wishlist count separately
 		if (key === 'wishlistCount') {
 			this.updateWishlistCount();
 		}
@@ -59,7 +81,6 @@ export class Counter {
 			}
 		}
 	}
-
 
 	updateTotalPrice() {
 		const totalElement = document.getElementById('totalPrice');
@@ -91,7 +112,6 @@ export class Counter {
 		this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 		this.updateLastItems();
 	}
-
 
 	updateLastItems() {
 		const lastItemsContainer = document.querySelector('.last-items-list');
@@ -189,7 +209,6 @@ export class Counter {
 		}
 	}
 
-
 	handleProductBuyClick(event) {
 		if (event.target.matches('.product-buy-actions .btn-buy--js') && event.target.closest('.btn-buy--js')) {
 			this.buyCount++;
@@ -212,9 +231,6 @@ export class Counter {
 		if (event.target.matches('.btn-add--js')) {
 			this.buyCount++;
 			this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
-
-			// Тут можна додати логіку, яка необхідна при кліці на кнопку з класом .btn-add--js
-
 			this.updateLastItems();
 		}
 	}
@@ -224,22 +240,17 @@ export class Counter {
 			this.wishlistCount++;
 			this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
 
-			// Отримати дані про обраний товар
 			const productTitle = event.target.closest('.card-body').querySelector('.card-title').textContent;
 			const productPrice = event.target.closest('.card-body').querySelector('.card-text').textContent;
 			const productImage = event.target.closest('.card').querySelector('.card-img-top').src;
 
-			// Отримати існуючі обрані товари з локального сховища або створити новий масив
 			const wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
 
-			// Додати обраний товар до масиву обраних товарів
 			wishlistItems.push({ title: productTitle, price: productPrice, image: productImage });
 
-			// Зберегти оновлений масив обраних товарів у локальне сховище
 			localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
 		}
 	}
-
 
 	handleQuantityClick(event) {
 		if (event.target.classList.contains('fa-circle-plus')) {
@@ -280,7 +291,6 @@ export class Counter {
 		this.updateLastItems();
 	}
 
-
 	handleRemoveItemClick(event) {
 		if (event.target.classList.contains('remove-icon')) {
 			const itemIndex = event.target.closest('.last-item').getAttribute('data-index');
@@ -294,9 +304,7 @@ export class Counter {
 
 			this.updateLastItems();
 
-			// Check if the cart is empty
 			if (lastItems.length === 0) {
-				// Redirect to shop.html when the cart is empty
 				window.location.href = 'shop.html';
 			}
 
@@ -319,6 +327,4 @@ export class Counter {
 		icon.classList.add('fa-solid', 'fa-sharp', iconClass, iconWrapperClass);
 		return icon;
 	}
-
-
 }
