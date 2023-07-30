@@ -1,4 +1,4 @@
-class DistrictSelector {
+class CheckOutForm {
 	constructor(citySelectId, districtSelectId, deliverySelectId) {
 		this.citySelectId = citySelectId;
 		this.districtSelectId = districtSelectId;
@@ -29,11 +29,18 @@ class DistrictSelector {
 			"Chernihiv": ["Chernihiv", "Koryukivskyi", "Nizhynskyi", "Novgorod-Siverskyi", "Prylutskyi"],
 		};
 
+		this.initializeDOMElements();
+		this.setupEventListeners();
+	}
+
+	initializeDOMElements() {
 		this.citySelect = document.getElementById(this.citySelectId);
 		this.districtSelect = document.getElementById(this.districtSelectId);
 		this.deliverySelect = document.getElementById(this.deliverySelectId);
 		this.ccExpirationInput = document.getElementById('cc-expiration');
+	}
 
+	setupEventListeners() {
 		if (this.citySelect && this.districtSelect && this.deliverySelect) {
 			this.citySelect.addEventListener('change', this.updateDistricts.bind(this));
 			this.deliverySelect.addEventListener('change', this.updateDeliveryDetails.bind(this));
@@ -48,18 +55,17 @@ class DistrictSelector {
 
 	updateCityOptions() {
 		for (const city in this.districtsByCity) {
-			const option = document.createElement('option');
-			option.value = city;
-			option.text = city;
-			this.citySelect.add(option);
+			this.createOption(city, city);
 		}
-
-		const otherOption = document.createElement('option');
-		otherOption.value = 'Other';
-		otherOption.text = 'Other';
-		this.citySelect.add(otherOption);
+		this.createOption('Other', 'Other');
 	}
 
+	createOption(value, text) {
+		const option = document.createElement('option');
+		option.value = value;
+		option.text = text;
+		this.citySelect.add(option);
+	}
 
 	updateDistricts() {
 		const selectedCity = this.citySelect.value;
@@ -77,7 +83,7 @@ class DistrictSelector {
 		let districts = this.districtsByCity[selectedCity];
 
 		if (selectedCity === 'Other') {
-			districts = ['Other']; 
+			districts = ['Other'];
 		}
 
 		districts.forEach((district) => {
@@ -86,7 +92,6 @@ class DistrictSelector {
 			this.districtSelect.add(option);
 		});
 	}
-
 
 	checkCustomOption() {
 		if (
@@ -204,4 +209,4 @@ class DistrictSelector {
 	}
 }
 
-export default DistrictSelector;
+export default CheckOutForm;

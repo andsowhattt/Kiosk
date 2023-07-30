@@ -1,9 +1,8 @@
-// app.js
 import './modules/toggler.js';
 import { carouselSwitcher } from './modules/carousel.js';
 import * as shop from './modules/shop.js';
 import { Counter } from './modules/counter.js';
-import DistrictSelector from './modules/checkout.js';
+import CheckOutForm from './modules/checkout.js';
 import { validateForm } from './modules/valid.js';
 import { sendMessage } from './modules/email.js';
 import { renderWishlistItems } from './modules/wishlist.js';
@@ -27,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	validateForm();
 
-	const districtSelector = new DistrictSelector('city', 'district', 'delivery');
+	const checkOutForm = new CheckOutForm('city', 'district', 'delivery');
 
 	new Counter();
 
