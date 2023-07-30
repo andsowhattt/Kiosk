@@ -1,31 +1,28 @@
+// app.js
 import './modules/toggler.js';
 import { carouselSwitcher } from './modules/carousel.js';
-import { productsLink, randomProductsLink, randomSaleLink, fetchProducts, hideLoadingOverlay } from './modules/shop.js';
+import * as shop from './modules/shop.js';
 import { Counter } from './modules/counter.js';
 import DistrictSelector from './modules/checkout.js';
 import { validateForm } from './modules/valid.js';
 import { sendMessage } from './modules/email.js';
 import { renderWishlistItems } from './modules/wishlist.js';
 
-
 document.addEventListener('DOMContentLoaded', () => {
 
-	// Перевірка на наявність контейнера ".cards" на головній сторінці
 	const cardsContainer = document.querySelector('.cards');
 	if (cardsContainer) {
-		fetchProducts(productsLink, '.cards').then(() => hideLoadingOverlay());
+		shop.fetchProducts(shop.apiLinks.products, '.cards').then(() => shop.hideLoadingOverlay());
 	}
 
-	// Перевірка на наявність контейнера ".random__cards" на сторінці каталогу
 	const randomCardsContainer = document.querySelector('.random__cards');
 	if (randomCardsContainer) {
-		fetchProducts(randomProductsLink, '.random__cards');
+		shop.fetchProducts(shop.apiLinks.randomProducts, '.random__cards');
 	}
 
-	// Перевірка на наявність контейнера ".sale__cards" на сторінці каталогу
 	const saleCardsContainer = document.querySelector('.sale__cards');
 	if (saleCardsContainer) {
-		fetchProducts(randomSaleLink, '.sale__cards');
+		shop.fetchProducts(shop.apiLinks.randomSale, '.sale__cards');
 	}
 
 	validateForm();
