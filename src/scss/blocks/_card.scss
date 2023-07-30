@@ -22,7 +22,7 @@
 	}
 }
 
-/* Стилі для анімації завантаження */
+
 .loading-overlay {
 	position: absolute;
 	top: 0;
@@ -32,16 +32,16 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: rgba(255, 255, 255, 0.7);
+	background-color: inherit;
 	z-index: 9999;
  }
  
- /* Стилі для іконки завантаження */
+
  .spinner-border {
 	width: 3rem;
 	height: 3rem;
  }
 
  .spinner-border.text-primary {
-	border-color: var(--accent); /* Змінюємо верхній колір рамки на червоний */
+	border-color: var(--accent); 
  }
