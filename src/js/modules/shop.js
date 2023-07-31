@@ -1,5 +1,5 @@
 export const apiLinks = {
-	products: 'https://api.escuelajs.co/api/v1/products?categoryId=1',
+	products: 'https://api.escuelajs.co/api/v1/products',
 	randomProducts: 'https://api.escuelajs.co/api/v1/products?offset=0&limit=3',
 	randomSale: 'https://api.escuelajs.co/api/v1/products?offset=0&limit=6',
 };
@@ -54,7 +54,7 @@ export function renderProducts(products, containerClass) {
 						<a href="#" class="btn btn-secondary btn-wish--js"><i class="fas fa-heart enlarged-icon"></i>Wishlist this</a>
 					</div>
 					<div class="products-details">
-						<a href="shop-cart.html" class="btn btn-dark">View Details</a>
+						<a href="#" class="btn btn-dark">View Details</a>
 					</div>
 				</div>
 			</div>

@@ -1,0 +1,202 @@
+<div class="form">
+	<h4 class="form__title">Checkout Form</h4>
+	<hr class="mb-4">
+	<div class="form__block row">
+		<div class="form__block-order order col-md-4 order-md-2 mb-4" id="cartItemsBlock">
+			<hr class="mb-4">
+			<h4 class="order__quantity d-flex justify-content-between align-items-center mb-3">
+				<span class="order__quantity-title text-muted">Your cart</span>
+				<span class="order__quantity-number badge badge-secondary badge-pill" id="copy_cart-count"></span>
+			</h4>
+			<ul class="order__products list-group mb-3" id="cartItemList">
+			</ul>
+			<div class="order__cost list-group-item d-flex justify-content-between">
+				<span class="order__cost-title">Cost (USD)</span>
+				<strong class="order__cost-price copy_total"></strong>
+			</div>
+			<div class="order__promo list-group-item d-flex justify-content-between bg-light">
+				<div class="order__promo-title">
+					<h6 class="my-0">Promo code</h6>
+					<small>EXAMPLECODE</small>
+				</div>
+				<span class="order__promo-sale">-$5</span>
+			</div>
+			<div class="order__total list-group-item d-flex justify-content-between">
+				<span class="order__total-title">Total (USD)</span>
+				<strong class="order__total-promo promo__total--js"></strong>
+			</div>
+			<form class="order__redeem card p-2">
+				<div class="order__redeem-input input-group">
+					<input type="text" class="form-control" placeholder="Promo code">
+					<div class="input-group-append">
+						<button type="submit" class="order__redeem-btn btn btn-secondary">Redeem</button>
+					</div>
+				</div>
+			</form>
+			<hr class="mb-2">
+			<button id="editOrderButton" class="order__btn button btn-block" data-toggle="modal"
+				data-target="#cartModal">Edit
+				order
+			</button>
+		</div>
+
+		<div class="form__block-bill bill col-md-8 order-md-1">
+			<h4 class="bill__title mb-3">Billing address</h4>
+			<form class="bill__form needs-validation" novalidate>
+				<div class="bill__form-block initials row">
+					<div class="initials__field col-md-6 mb-3">
+						<label class="initials__field-label" for="firstName">First name</label>
+						<input type="text" class="initials__field-firstname form-control" id="firstName" placeholder="" value="" pattern="[A-Za-z]+"
+							required>
+						<div class="initials__field-invalid invalid-feedback">
+							Valid first name is required. Only letters are allowed.
+						</div>
+					</div>
+					<div class="initials__field col-md-6 mb-3">
+						<label class="initials__field-label" for="lastName">Last name</label>
+						<input type="text" class="initials__field-lastname form-control" id="lastName" placeholder="" value="" pattern="[A-Za-z]+"
+							required>
+						<div class="initials__field-invalid invalid-feedback">
+							Valid last name is required. Only letters are allowed.
+						</div>
+					</div>
+				</div>
+
+				<div class="bill__form-block username mb-3">
+					<label class="username__title" for="username">Username</label>
+					<div class="username__field input-group">
+						<div class="username__field-prepend input-group-prepend">
+							<span class="input-group-text">@</span>
+						</div>
+						<input type="text" class="username__field-input form-control" id="username" placeholder="Username" required>
+						<div class="username__field-invalid invalid-feedback" style="width: 100%;">
+							Your username is required.
+						</div>
+					</div>
+				</div>
+
+				<div class="bill__form-block email mb-3">
+					<label class="email__title" for="email">Email</label>
+					<input type="email" class="email__input form-control" id="email" placeholder="you@example.com" required>
+					<div class="emain__invalid invalid-feedback">
+						Please enter a valid email address for shipping updates.
+					</div>
+				</div>
+
+				<div class="bill__form-block address mb-3">
+					<label class="address__title" for="address">Address</label>
+					<input type="text" class="address__input form-control" id="address" placeholder="1234 Main St" required>
+					<div class="address__invalid invalid-feedback">
+						Please enter your shipping address.
+					</div>
+				</div>
+
+				<div class="bill__form-block location row">
+					<div class="location__input col-md-5 mb-3">
+						<label class="location__input-title" for="city">City</label>
+						<select class="location__input-city custom-select d-block w-100" id="city" required>
+							<option value="">Choose...</option>
+						</select>
+						<div class="location__input-invalid invalid-feedback">
+							Please select a valid city.
+						</div>
+					</div>
+					<div class="location__input col-md-4 mb-3">
+						<label class="location__input-title" for="district">District</label>
+						<select class="location__input-district custom-select d-block w-100" id="district" required>
+							<option value="">Choose...</option>
+						</select>
+						<div class="location__input-invalid invalid-feedback">
+							Please provide a valid district.
+						</div>
+					</div>
+					<div class="location__input col-md-3 mb-3">
+						<label class="location__input-title" for="zip">Zip</label>
+						<input type="text" class="location__input-zip form-control" id="zip" placeholder="" pattern="\d+" required>
+						<div class="location__input-invalid invalid-feedback">
+							Zip code required. Only digits are allowed.
+						</div>
+					</div>
+				</div>
+
+
+				<div class="bill__form-block delivery row">
+					<hr class="mb-4">
+					<h4 class="delivery__title mb-3">Delivery</h4>
+					<div class="delivery__options col-md-5 mb-3">
+						<label class="delivery__options-title" for="delivery">Type of delivery</label>
+						<select class="delivery__options-select custom-select d-block w-100" id="delivery" required>
+							<option value="">Choose...</option>
+							<option value="Nova Poshta">Nova Poshta</option>
+							<option value="Ukr Poshta">Ukr Poshta</option>
+							<option value="Courier Delivery">Courier Delivery</option>
+						</select>
+						<div class="delivery__options-invalid invalid-feedback">
+							Please select a valid delivery.
+						</div>
+					</div>
+					<div class="delivery__details" id="deliveryDetails"></div>
+				</div>
+
+				<div class="bill__form-block payment d-block my-3">
+					<hr class="mb-4">
+					<h4 class="payment__title mb-3">Payment</h4>
+					<div class="payment__option custom-control custom-radio">
+						<input id="credit" name="paymentMethod" type="radio" class="payment__option-type custom-control-input" checked required>
+						<label class="payment__option-credit custom-control-label" for="credit">Credit card</label>
+					</div>
+					<div class="payment__option custom-control custom-radio">
+						<input id="debit" name="paymentMethod" type="radio" class="payment__option-type custom-control-input" required>
+						<label class="payment__option-debit custom-control-label" for="debit">Debit card</label>
+					</div>
+					<div class="payment__option custom-control custom-radio">
+						<input id="paypal" name="paymentMethod" type="radio" class="payment__option-type custom-control-input" required>
+						<label class="payment__option-paypal custom-control-label" for="paypal">PayPal</label>
+					</div>
+				</div>
+
+				<div class="bill__form-block credit row">
+					<div class="credit__info col-md-6 mb-3">
+						<label for="credit__info-title cc-number">Credit card number</label>
+						<input type="text" class="credit__info-input form-control" id="cc-number" placeholder="" pattern="\d{16,}" required>
+						<div class="credit__info-invalid invalid-feedback">
+							Credit card number is required. Only digits are allowed, minimum 16 digits.
+						</div>
+					</div>
+					<div class="credit__info col-md-6 mb-3">
+						<label for="credit__info-title cc-name">Name on card</label>
+						<input type="text" class="credit__info-input form-control" id="cc-name" placeholder="" pattern="[A-Za-z\s]+" required>
+						<small class="credit__info-muted text-muted">Full name as displayed on card</small>
+						<div class="credit__info-invalid invalid-feedback">
+							Name on card is required. Only letters and spaces are allowed.
+						</div>
+					</div>
+				</div>
+
+				<div class="bill__form-block verifiraction row">
+					<div class="verifiraction__input col-md-3 mb-3">
+						<label for="verifiraction__input-title cc-expiration">Expiration</label>
+						<input type="text" class="verifiraction__input-expiration form-control" id="cc-expiration" placeholder="" pattern="\d{1,2}\/\d{2}"
+							required>
+						<div class="verifiraction__input-invalid invalid-feedback">
+							Expiration date required. Please use the format MM/YY.
+						</div>
+					</div>
+
+					<div class="verifiraction__input col-md-3 mb-3">
+						<label for="verifiraction__input-title cc-cvv">CVV</label>
+						<input type="text" class="verifiraction__input-cvv form-control" id="cc-cvv" placeholder="" pattern="\d{3}" required>
+						<div class="verifiraction__input-invalid invalid-feedback">
+							Security code required. Only 3 digits are allowed.
+						</div>
+					</div>
+				</div>
+				<hr class="mb-4">
+				<button class="bill__form-btn button btn-block confirm-button--js" type="submit">
+					Confirm the order
+				</button>
+			</form>
+			<hr class="mb-4">
+		</div>
+	</div>
+</div>
