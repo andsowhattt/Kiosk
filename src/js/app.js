@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	carouselSwitcher();
 
-	const form = document.querySelector('.message__form--js');
+	const form = document.querySelector('.message-form--js');
 	if (form) {
 		form.addEventListener('submit', function (event) {
 			event.preventDefault();

@@ -1,5 +1,5 @@
 export async function sendMessage() {
-	const form = document.querySelector('.message__form--js');
+	const form = document.querySelector('.message-form--js');
 	const formData = new FormData(form);
 
 	try {
