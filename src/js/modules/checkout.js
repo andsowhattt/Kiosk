@@ -37,7 +37,7 @@ class CheckOutForm {
 		this.citySelect = document.getElementById(this.citySelectId);
 		this.districtSelect = document.getElementById(this.districtSelectId);
 		this.deliverySelect = document.getElementById(this.deliverySelectId);
-		this.ccExpirationInput = document.getElementById('cc-expiration');
+		this.ccExpirationInput = document.querySelector('.verifiraction__input-expiration');
 	}
 
 	setupEventListeners() {
@@ -137,7 +137,7 @@ class CheckOutForm {
 
 	updateDeliveryDetails() {
 		const delivery = this.deliverySelect.value;
-		const deliveryDetailsContainer = document.getElementById('deliveryDetails');
+		const deliveryDetailsContainer = document.querySelector('.delivery__details--js');
 		deliveryDetailsContainer.innerHTML = '';
 
 		if (delivery === 'Nova Poshta' || delivery === 'Ukr Poshta') {
