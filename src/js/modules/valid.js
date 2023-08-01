@@ -1,5 +1,5 @@
 export function validateForm() {
-	const form = document.querySelector('.needs-validation');
+	const form = document.querySelector('.needs-validation--js');
 	const submitBtn = document.querySelector('.confirm-button--js');
 
 	if (!form) return;
