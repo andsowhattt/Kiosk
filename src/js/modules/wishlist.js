@@ -31,13 +31,13 @@ export function renderWishlistItems(container) {
 
 		card.innerHTML = `
 			<div class="card">
-				<img class="card-img-top" src="${item.image}" alt="${item.title}">
-				<div class="card-body">
-					<h5 class="card-title">${item.title}</h5>
-					<p class="card-text">${item.price}</p>
-					<div class="product-actions">
-						<a href="#" class="btn card-btn btn-add--js">Add to cart</a>
-						<button class="btn btn-secondary btn-remove--js" data-title="${item.title}">Remove</button>
+				<img class="card__img card-img-top" src="${item.image}" alt="${item.title}">
+				<div class="card__block card-body">
+					<h5 class="card__block-title card-title">${item.title}</h5>
+					<p class="card__block-price card-text">${item.price}</p>
+					<div class="card__block-actions actions">
+						<a href="#" class="actions__add btn card-btn btn-add--js">Add to cart</a>
+						<button class="actions__remove btn btn-secondary btn-remove--js" data-title="${item.title}">Remove</button>
 					</div>
 				</div>
 			</div>`;
@@ -57,7 +57,7 @@ document.addEventListener('click', (event) => {
 // Додавання товару в корзину
 document.addEventListener('click', (event) => {
 	if (event.target.classList.contains('btn-add--js')) {
-		const titleToAdd = event.target.closest('.card-body').querySelector('.card-title').textContent;
+		const titleToAdd = event.target.closest('.card__block').querySelector('.card__block-title').textContent;
 		addToCart(titleToAdd);
 		removeFromWishlist(titleToAdd);
 	}
@@ -87,7 +87,7 @@ function addToCart(title) {
 		localStorage.setItem('buyCount', updatedBuyCount);
 
 		// Оновити відображення лічильника buyCount на сторінці
-		const buyCountElement = document.getElementById('buyCount');
+		const buyCountElement = document.querySelector('.buy-count--js');
 		buyCountElement.textContent = updatedBuyCount;
 	}
 }
@@ -110,7 +110,7 @@ function removeFromWishlist(title) {
 	localStorage.setItem('wishlistCount', updatedWishlistCount);
 
 	// Оновити відображення лічильника wishlistCount на сторінці
-	const wishlistCountElement = document.getElementById('wishlistCount');
+	const wishlistCountElement = document.querySelector('.wishlist-count--js');
 	wishlistCountElement.textContent = updatedWishlistCount;
 
 	// Перевірити, чи потрібно перерендерити список бажань на сторінці wishlist.html

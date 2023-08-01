@@ -30,11 +30,11 @@ export class Counter {
 		return {
 			buyCount: parseInt(localStorage.getItem('buyCount')) || 0,
 			wishlistCount: parseInt(localStorage.getItem('wishlistCount')) || 0,
-			cartIcon: document.querySelector('.buy'),
-			cartItemList: document.getElementById('cartItemList'),
+			cartIcon: document.querySelector('.buy-modal--js'),
+			cartItemList: document.querySelector('.order-products--js'),
 			checkoutButton: document.querySelector('.checkout-button--js'),
-			buyCountElement: document.getElementById('buyCount'),
-			wishlistCountElement: document.getElementById('wishlistCount'),
+			buyCountElement: document.querySelector('.buy-count--js'),
+			wishlistCountElement: document.querySelector('.wishlist-count--js'),
 		};
 	}
 
@@ -66,25 +66,11 @@ export class Counter {
 			this.updateTotalPrice();
 		}
 
-		if (key === 'wishlistCount') {
-			this.updateWishlistCount();
-		}
-	}
-
-	updateWishlistCount() {
-		const wishlistIcon = document.querySelector('.wishlist');
-		if (wishlistIcon) {
-			if (this.wishlistCount > 0) {
-				wishlistIcon.textContent = this.wishlistCount;
-			} else {
-				wishlistIcon.textContent = '';
-			}
-		}
 	}
 
 	updateTotalPrice() {
-		const totalElement = document.getElementById('totalPrice');
-		const promoTotalElement = document.querySelector('.promo__total--js');
+		const totalElement = document.querySelector('.total-price--js');
+		const promoTotalElement = document.querySelector('.promo-total--js');
 
 		const totalPrice = this.calculateTotalPrice();
 		totalElement.textContent = `$${totalPrice}`;
@@ -114,10 +100,10 @@ export class Counter {
 	}
 
 	updateLastItems() {
-		const lastItemsContainer = document.querySelector('.last-items-list');
-		const cartItemList = document.getElementById('cartItemList');
-		const copyCartCount = document.getElementById('copy_cart-count');
-		const copyTotalElement = document.querySelector('.copy_total');
+		const lastItemsContainer = document.querySelector('.last-items--js');
+		const cartItemList = document.querySelector('.order-products--js');
+		const copyCartCount = document.querySelector('.copy-count--js');
+		const copyTotalElement = document.querySelector('.copy-cost--js');
 
 		document.addEventListener('click', event => {
 			if (event.target.classList.contains('fa-circle-plus') || event.target.classList.contains('fa-circle-minus')) {
@@ -210,13 +196,13 @@ export class Counter {
 	}
 
 	handleProductBuyClick(event) {
-		if (event.target.matches('.product-buy-actions .btn-buy--js') && event.target.closest('.btn-buy--js')) {
+		if (event.target.matches('.actions__btn .btn-buy--js') && event.target.closest('.btn-buy--js')) {
 			this.buyCount++;
 			this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 
-			const productTitle = event.target.closest('.card-body').querySelector('.card-title').textContent;
-			const productPrice = event.target.closest('.card-body').querySelector('.card-text').textContent;
-			const productImage = event.target.closest('.card').querySelector('.card-img-top').src;
+			const productTitle = event.target.closest('.card__block').querySelector('.card__block-title').textContent;
+			const productPrice = event.target.closest('.card__block').querySelector('.card__block-price').textContent;
+			const productImage = event.target.closest('.card').querySelector('.card__img').src;
 
 			const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
 
@@ -236,13 +222,13 @@ export class Counter {
 	}
 
 	handleWishlistClick(event) {
-		if (event.target.matches('.product-buy-actions .btn-wish--js')) {
+		if (event.target.matches('.actions__btn .btn-wish--js')) {
 			this.wishlistCount++;
 			this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
 
-			const productTitle = event.target.closest('.card-body').querySelector('.card-title').textContent;
-			const productPrice = event.target.closest('.card-body').querySelector('.card-text').textContent;
-			const productImage = event.target.closest('.card').querySelector('.card-img-top').src;
+			const productTitle = event.target.closest('.card__block').querySelector('.card__block-title').textContent;
+			const productPrice = event.target.closest('.card__block').querySelector('.card__block-price').textContent;
+			const productImage = event.target.closest('.card').querySelector('.card__img').src;
 
 			const wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
 

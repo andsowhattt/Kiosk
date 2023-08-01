@@ -44,17 +44,17 @@ export function renderProducts(products, containerClass) {
 
 		card.innerHTML = `
 		<div class="card">
-			<img class="card-img-top" src="${images}" alt="${title}">
-			<div class="card-body">
-				<h5 class="card-title">${title}</h5>
-				<p class="card-text">$${price}</p>
-				<div class="product-actions">
-					<div class="product-buy-actions">
-						<a href="#" class="btn card-btn btn-buy--js"><i class="fas fa-shopping-cart enlarged-icon"></i>Buy</a>
-						<a href="#" class="btn btn-secondary btn-wish--js"><i class="fas fa-heart enlarged-icon"></i>Wishlist this</a>
+			<img class="card__img card-img-top" src="${images}" alt="${title}">
+			<div class="card__block card-body">
+				<h5 class="card__block-title card-title">${title}</h5>
+				<p class="card__block-price card-text">$${price}</p>
+				<div class="card__block-actions actions">
+					<div class="actions__btn">
+						<a href="#" class="actions__btn-buy btn card-btn btn-buy--js"><i class="fas fa-shopping-cart enlarged-icon"></i>Buy</a>
+						<a href="#" class="actions__btn-wish btn btn-secondary btn-wish--js"><i class="fas fa-heart enlarged-icon"></i>Wishlist this</a>
 					</div>
-					<div class="products-details">
-						<a href="#" class="btn btn-dark">View Details</a>
+					<div class="actions__details">
+						<a href="#" class="actions__details-btn btn btn-dark">View Details</a>
 					</div>
 				</div>
 			</div>

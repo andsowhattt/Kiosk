@@ -17,7 +17,7 @@ export function validateForm() {
 }
 
 function updateCartAfterCheckout() {
-	const cartCountElement = document.getElementById('buyCount');
+	const cartCountElement = document.querySelector('.buy-count--js');
 	const currentCartCount = parseInt(cartCountElement.textContent) || 0;
 
 	cartCountElement.textContent = '';

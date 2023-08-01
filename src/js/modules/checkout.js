@@ -137,7 +137,7 @@ class CheckOutForm {
 
 	updateDeliveryDetails() {
 		const delivery = this.deliverySelect.value;
-		const deliveryDetailsContainer = document.querySelector('.delivery__details--js');
+		const deliveryDetailsContainer = document.querySelector('.delivery-details--js');
 		deliveryDetailsContainer.innerHTML = '';
 
 		if (delivery === 'Nova Poshta' || delivery === 'Ukr Poshta') {

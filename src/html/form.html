@@ -6,13 +6,13 @@
 			<hr class="mb-4">
 			<h4 class="order__quantity d-flex justify-content-between align-items-center mb-3">
 				<span class="order__quantity-title text-muted">Your cart</span>
-				<span class="order__quantity-number badge badge-secondary badge-pill" id="copy_cart-count"></span>
+				<span class="order__quantity-number badge badge-secondary badge-pill copy-count--js"></span>
 			</h4>
-			<ul class="order__products list-group mb-3" id="cartItemList">
+			<ul class="order__products list-group order-products--js mb-3">
 			</ul>
 			<div class="order__cost list-group-item d-flex justify-content-between">
 				<span class="order__cost-title">Cost (USD)</span>
-				<strong class="order__cost-price copy_total"></strong>
+				<strong class="order__cost-price copy-cost--js"></strong>
 			</div>
 			<div class="order__promo list-group-item d-flex justify-content-between bg-light">
 				<div class="order__promo-title">
@@ -23,7 +23,7 @@
 			</div>
 			<div class="order__total list-group-item d-flex justify-content-between">
 				<span class="order__total-title">Total (USD)</span>
-				<strong class="order__total-promo promo__total--js"></strong>
+				<strong class="order__total-promo promo-total--js"></strong>
 			</div>
 			<form class="order__redeem card p-2">
 				<div class="order__redeem-input input-group">
@@ -135,7 +135,7 @@
 							Please select a valid delivery.
 						</div>
 					</div>
-					<div class="delivery__details delivery__details--js"></div>
+					<div class="delivery__details delivery-details--js"></div>
 				</div>
 
 				<div class="bill__form-block payment d-block my-3">

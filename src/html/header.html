@@ -23,35 +23,34 @@
 				</a>
 				<a class="cart__link navbar-icon like" href="wishlist.html">
 					<i class="cart__link-icon fas fa-heart enlarged-icon"></i>
-					<span id="wishlistCount" class="count"></span>
+					<span class="count wishlist-count--js"></span>
 				</a>
 				<a class="cart__link navbar-icon" href="#" data-toggle="modal" data-target="#cartModal">
-					<i class="cart__link-icon buy fas fa-solid fa-cart-shopping enlarged-icon"></i>
-					<span id="buyCount" class="count"></span>
+					<i class="cart__link-icon buy-modal--js fas fa-solid fa-cart-shopping enlarged-icon"></i>
+					<span class="count buy-count--js"></span>
 				</a>
 			</div>
 		</div>
-		<div class="modal" id="cartModal">
+		<div class="header__modal modal" id="cartModal">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">Корзина</h5>
+						<h5 class="modal-title">Shopping cart</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body ">
-						<ul class="cart-items-list"></ul>
-						<div class="last-items">
-							<h6>Останні товари:</h6>
-							<ul class="last-items-list"></ul>
+					<div class="modal-body shopcart">
+						<ul class="shopcart__list cart-items-list"></ul>
+						<div class="shopcart__items last-items">
+							<h6 class="shopcart__items-title">Latest products:</h6>
+							<ul class="shopcart__items-list last-items--js"></ul>
 						</div>
-
 					</div>
 					<div class="modal-footer">
-						<a href="../checkout.html" class="btn btn-primary checkout-button--js">Make a purchase</a>
+						<a href="../checkout.html" class="modal-btn btn btn-primary checkout-button--js">Make a purchase</a>
 					</div>
-					<p class="total-price-text">Total price: <span id="totalPrice">$0.00</span></p>
+					<p class="modal-text total-price-text">Total price: <span class="total-price--js">$0.00</span></p>
 				</div>
 			</div>
 		</div>
