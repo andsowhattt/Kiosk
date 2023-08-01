@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
-	const wishlistContainer = document.querySelector('.wishlist-container');
+	const wishlistContainer = document.querySelector('.wishlist__block');
 	if (wishlistContainer) {
 		renderWishlistItems(wishlistContainer);
 	}

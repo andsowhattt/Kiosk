@@ -1,5 +1,5 @@
 // Отримання іконки вішлісту
-const wishlistIcon = document.querySelector('.like');
+const wishlistIcon = document.querySelector('.like--js');
 
 // Обробник кліку на іконку вішлісту
 wishlistIcon.addEventListener('click', (event) => {
@@ -115,7 +115,7 @@ function removeFromWishlist(title) {
 
 	// Перевірити, чи потрібно перерендерити список бажань на сторінці wishlist.html
 	if (window.location.href.includes("wishlist.html")) {
-		renderWishlistItems(document.querySelector('.wishlist-container'));
+		renderWishlistItems(document.querySelector('.wishlist__block'));
 	}
 
 	// Перевірка на сторінці wishlist.html і перехід на main.html, якщо вішліст порожній
