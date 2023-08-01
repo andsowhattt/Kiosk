@@ -23,7 +23,7 @@
 }
 
 
-.loading-overlay {
+.cards__loading {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -37,11 +37,12 @@
  }
  
 
- .spinner-border {
+ .cards__loading-spinner {
 	width: 3rem;
 	height: 3rem;
+	border-color: var(--accent); 
  }
 
- .spinner-border.text-primary {
+ .cards__loading-spinner.text-primary {
 	border-color: var(--accent); 
  }

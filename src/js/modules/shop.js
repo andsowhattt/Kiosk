@@ -4,7 +4,7 @@ export const apiLinks = {
 	randomSale: 'https://api.escuelajs.co/api/v1/products?offset=0&limit=6',
 };
 
-const loadingOverlayClass = 'loading-overlay';
+const loadingOverlayClass = 'loading-overlay--js';
 
 function createLoadingOverlay(container) {
 	const loadingOverlay = document.createElement('div');

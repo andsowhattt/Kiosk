@@ -11,7 +11,13 @@
 
 <body>
 	@@include('html/header.html',{})
-	@@include('html/cards.html',{})
+	<div class="container">
+		<div class="shop">
+			<div class="shop__cards">
+				@@include('html/cards.html',{})
+			</div>
+		</div>
+	</div>
 	@@include('html/footer.html',{})
 
 	<script src="https://kit.fontawesome.com/b033b40352.js" crossorigin="anonymous"></script>
