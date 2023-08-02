@@ -1,4 +1,4 @@
-import './modules/toggler.js';
+import './modules/switch.js';
 import { carouselSwitcher } from './modules/carousel.js';
 import * as shop from './modules/shop.js';
 import { Counter } from './modules/counter.js';
