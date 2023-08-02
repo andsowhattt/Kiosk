@@ -1,6 +1,6 @@
 const darkModeToggle = document.querySelector('.switch__dark');
 const menuItems = document.querySelectorAll('.bar__list-link');
-const modalContent = document.querySelector('.modal-content-js');
+const modalContent = document.querySelector('.modal-content--js');
 
 const isDarkMode = localStorage.getItem('darkMode') === 'true';
 setDarkMode(isDarkMode);
