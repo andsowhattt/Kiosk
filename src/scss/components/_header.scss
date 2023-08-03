@@ -11,17 +11,20 @@
 		text-decoration: none; 
 		cursor: default;
 		.network {
+			&__link {
+				text-decoration: none;
+			}
 			&__icon {
 				font-size: 25px;
-				margin: 5px;
+				margin: 15px;
 				color: #000000;
-				@media screen and (max-width: 500px){
-					font-size: 20px;
+				&:hover {
+					color: var(--accent);
+					text-decoration: none;
 				}
-			}
-			&__icon:hover {
-				color: var(--accent);
-				text-decoration: none;
+				@media screen and (max-width: 713px){
+					margin: 5px;
+				}
 			}
 		}
 	}
@@ -38,16 +41,19 @@
 	}
 	&__top-cart {
 		.cart {
+			&__link {
+				text-decoration: none;
+			}
 			&__link-icon {
 				font-size: 25px;
-				margin: 5px;
+				margin: 15px;
 				color: #000000;
 				&:hover {
 					color: var(--accent);
 					text-decoration: none;
 				}
-				@media screen and (max-width: 500px){
-					font-size: 20px;
+				@media screen and (max-width: 713px){
+					margin: 5px;
 				}
 			}
 			&__link-count {
@@ -74,3 +80,4 @@
 		}
 	}
 }
+

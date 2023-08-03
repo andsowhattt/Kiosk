@@ -8,9 +8,10 @@
 	& .navbar-top{
 		background-color: var(--accent);
 	}
-	& .fab:hover {
+	& .network__icon:hover {
 		color: white;
 		text-decoration: none;
+		
 	}
 	& .form__block-order {
 		color: black;
@@ -21,4 +22,9 @@
 	& .bar__list-link {
 		color: white;
 	}
+	& .header__menu-toggler {
+		background-color: var(--accent);
+	}
 } 
+
+
