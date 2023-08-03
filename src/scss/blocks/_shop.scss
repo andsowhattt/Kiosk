@@ -1,11 +1,22 @@
-.actions__btn {
-	margin-bottom: 10px;
+.cards {
+	&__loading {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: inherit;
+		z-index: 9999;
+	}
+	&__loading-spinner{
+		width: 3rem;
+		height: 3rem;
+		border-color: var(--accent); 
+	}
+	&__loading-spinner.text-primary{
+		border-color: var(--accent); 
+	}
 }
-
-.enlarged-icon {
-	margin-right: 10px;
-}
-
-
-
-

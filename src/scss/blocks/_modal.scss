@@ -1,0 +1,23 @@
+.shopcart {
+	&__items-list {
+		max-height: 200px;
+		overflow-y: auto;
+	}
+	&__items-list.last-items {
+		.last-item {
+			display: flex;
+			align-items: center;
+			margin-bottom: 10px;
+			&-image {
+				width: 100px;
+				height: 100px;
+				object-fit: cover;
+				margin-right: 10px;
+			}
+			&-details {
+				display: flex;
+				flex-direction: column;
+			}
+		}
+	}
+}

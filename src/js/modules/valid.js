@@ -8,7 +8,7 @@ export function validateForm() {
 		event.preventDefault();
 		if (form.checkValidity()) {
 			updateCartAfterCheckout();
-			window.location.href = "thx.html";
+			window.location.href = "thank.html";
 		} else {
 			event.stopPropagation();
 			form.classList.add('was-validated');
