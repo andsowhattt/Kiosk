@@ -1,7 +1,8 @@
 const darkModeToggle = document.querySelector('.switch__dark');
 const menuItems = document.querySelectorAll('.bar__list-link');
 
-const isDarkMode = localStorage.getItem('darkMode') === 'true';
+// Перевіряємо чи існує значення в local storage, якщо немає, то ставимо темний режим як стандартний
+const isDarkMode = localStorage.getItem('darkMode') !== 'false';
 darkModeToggle.checked = isDarkMode;
 setDarkMode(isDarkMode);
 
