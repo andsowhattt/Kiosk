@@ -21,9 +21,9 @@ export async function fetchProducts(link, containerClass) {
 		const result = await fetch(link);
 		const data = await result.json();
 
-		removeLoadingOverlay(loadingOverlay);
-
 		renderProducts(data, containerClass);
+
+		removeLoadingOverlay(loadingOverlay);
 	} catch (error) {
 		console.log('Error fetching data:', error);
 	}
