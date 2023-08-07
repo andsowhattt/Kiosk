@@ -1,29 +1,16 @@
-const loadingOverlayClass = 'loading-overlay--js';
-
-function createLoadingOverlay(container) {
-	const loadingOverlay = document.createElement('div');
-	loadingOverlay.classList.add(loadingOverlayClass);
-	container.appendChild(loadingOverlay);
-	return loadingOverlay;
-}
-
-function removeLoadingOverlay(loadingOverlay) {
-	if (loadingOverlay) {
-		loadingOverlay.remove();
-	}
-}
+import * as loader from './loader.js';
 
 export async function fetchProducts(link, containerClass) {
 	try {
 		const container = document.querySelector(containerClass);
-		const loadingOverlay = createLoadingOverlay(container);
+		const loadingOverlay = loader.createLoadingOverlay(container); 
 
 		const result = await fetch(link);
 		const data = await result.json();
 
 		renderProducts(data, containerClass);
 
-		removeLoadingOverlay(loadingOverlay);
+		loader.hideLoadingOverlay(); 
 	} catch (error) {
 		console.log('Error fetching data:', error);
 	}
@@ -55,9 +42,4 @@ export function renderProducts(products, containerClass) {
 		</div>`;
 		container.appendChild(card);
 	});
-}
-
-export function hideLoadingOverlay() {
-	const loadingOverlay = document.querySelector(`.${loadingOverlayClass}`);
-	removeLoadingOverlay(loadingOverlay);
 }
