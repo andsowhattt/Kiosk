@@ -1,5 +1,5 @@
 const darkModeToggle = document.querySelector('.switch__dark');
-const menuItems = document.querySelectorAll('.bar__list-link');
+const bodyElement = document.body; 
 
 const isDarkMode = localStorage.getItem('darkMode') !== 'false';
 darkModeToggle.checked = isDarkMode;
@@ -12,8 +12,5 @@ darkModeToggle.addEventListener('change', () => {
 });
 
 function setDarkMode(isDarkMode) {
-	document.body.classList.toggle('dark-mode', isDarkMode);
-	menuItems.forEach(menuItem => {
-		menuItem.style.color = isDarkMode ? 'white' : 'black';
-	}); 
+	bodyElement.classList.toggle('dark-mode', isDarkMode);
 }

@@ -1,4 +1,4 @@
-import './modules/switch.js';
+import './modules/mode.js';
 import { carouselSwitcher } from './modules/carousel.js';
 import * as shop from './modules/shop.js';
 import { Counter } from './modules/counter.js';
