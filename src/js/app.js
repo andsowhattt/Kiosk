@@ -1,5 +1,6 @@
 import './modules/mode.js';
 import { carouselSwitcher } from './modules/carousel.js';
+import * as api from './const/api.js'; 
 import * as shop from './modules/shop.js';
 import { Counter } from './modules/counter.js';
 import CheckOutForm from './modules/checkout.js';
@@ -11,17 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	const cardsContainer = document.querySelector('.cards');
 	if (cardsContainer) {
-		shop.fetchProducts(shop.apiLinks.products, '.cards').then(() => shop.hideLoadingOverlay());
+		shop.fetchProducts(api.apiLinks.products, '.cards').then(() => shop.hideLoadingOverlay());
 	}
 
 	const randomCardsContainer = document.querySelector('.random__cards');
 	if (randomCardsContainer) {
-		shop.fetchProducts(shop.apiLinks.randomProducts, '.random__cards');
+		shop.fetchProducts(api.apiLinks.randomProducts, '.random__cards');
 	}
 
 	const saleCardsContainer = document.querySelector('.sale__cards');
 	if (saleCardsContainer) {
-		shop.fetchProducts(shop.apiLinks.randomSale, '.sale__cards');
+		shop.fetchProducts(api.apiLinks.randomSale, '.sale__cards');
 	}
 
 	validateForm();
