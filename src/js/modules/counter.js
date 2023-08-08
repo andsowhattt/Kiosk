@@ -140,7 +140,7 @@ export class Counter {
 				const quantityWrapper = document.createElement('div');
 				quantityWrapper.classList.add('quantity-wrapper');
 
-				const minusIcon = this.createIconElement('fa-circle-minus', 'quantity-icon');
+				const minusIcon = this.createIconElement('fa-circle-minus quantity-icon');
 				quantityWrapper.appendChild(minusIcon);
 
 				const quantity = document.createElement('span');
@@ -148,10 +148,10 @@ export class Counter {
 				quantity.textContent = item.quantity || '1';
 				quantityWrapper.appendChild(quantity);
 
-				const plusIcon = this.createIconElement('fa-circle-plus', 'quantity-icon');
+				const plusIcon = this.createIconElement('fa-circle-plus quantity-icon');
 				quantityWrapper.appendChild(plusIcon);
 
-				const removeIcon = this.createIconElement('fa-trash', 'remove-icon');
+				const removeIcon = this.createIconElement('fa-trash remove-icon');
 				quantityWrapper.appendChild(removeIcon);
 
 				itemDetails.appendChild(quantityWrapper);
@@ -307,9 +307,10 @@ export class Counter {
 		}
 	}
 
-	createIconElement(iconClass, iconWrapperClass) {
+	createIconElement(additionalClass) {
 		const icon = document.createElement('i');
-		icon.classList.add('fa-solid', 'fa-sharp', iconClass, iconWrapperClass);
+		const classes = additionalClass.split(' ');
+		icon.classList.add('fa-solid', 'fa-sharp', ...classes);
 		return icon;
 	}
 }
