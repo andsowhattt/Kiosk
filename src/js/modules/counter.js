@@ -8,7 +8,7 @@ export class Counter {
 			checkoutButton,
 			buyCountElement,
 			wishlistCountElement,
-		} = this.getElements();
+		} = this.getItems();
 
 		this.buyCount = parseInt(localStorage.getItem('buyCount')) || 0;
 		this.wishlistCount = parseInt(localStorage.getItem('wishlistCount')) || 0;
@@ -25,7 +25,7 @@ export class Counter {
 
 	}
 
-	getElements() {
+	getItems() {
 		return {
 			buyCount: parseInt(localStorage.getItem('buyCount')) || 0,
 			wishlistCount: parseInt(localStorage.getItem('wishlistCount')) || 0,
