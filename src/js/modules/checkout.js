@@ -105,25 +105,12 @@ class CheckOutForm {
 	}
 
 	showCustomInputs() {
-		const customCityInput = document.createElement('input');
-		customCityInput.type = 'text';
-		customCityInput.id = 'customCityInput';
-		customCityInput.classList.add('form-control');
-		customCityInput.placeholder = 'Enter your city';
-		customCityInput.required = true;
-		customCityInput.pattern = '[A-Za-z]+';
-
-		const customDistrictInput = document.createElement('input');
-		customDistrictInput.type = 'text';
-		customDistrictInput.id = 'customDistrictInput';
-		customDistrictInput.classList.add('form-control');
-		customDistrictInput.placeholder = 'Enter your district';
-		customDistrictInput.required = true;
-		customDistrictInput.pattern = '[A-Za-z]+';
-
-		this.citySelect.insertAdjacentElement('afterend', customCityInput);
-		this.districtSelect.insertAdjacentElement('afterend', customDistrictInput);
+		const customCityInput = '<input type="text" id="customCityInput" class="form-control" placeholder="Enter your city" required pattern="[A-Za-z]+">';
+		const customDistrictInput = '<input type="text" id="customDistrictInput" class="form-control" placeholder="Enter your district" required pattern="[A-Za-z]+">';
+		this.citySelect.insertAdjacentHTML('afterend', customCityInput);
+		this.districtSelect.insertAdjacentHTML('afterend', customDistrictInput);
 	}
+	
 
 	hideCustomInputs() {
 		const customCityInput = document.getElementById('customCityInput');
@@ -139,66 +126,22 @@ class CheckOutForm {
 		const delivery = this.deliverySelect.value;
 		const deliveryDetailsContainer = document.querySelector('.delivery-details--js');
 		deliveryDetailsContainer.innerHTML = '';
-
+	
 		if (delivery === 'Nova Poshta' || delivery === 'Ukr Poshta') {
-			const cityInput = document.createElement('input');
-			cityInput.type = 'text';
-			cityInput.id = 'cityInput';
-			cityInput.classList.add('form-control');
-			cityInput.placeholder = 'Enter your city';
-			cityInput.required = true;
-			cityInput.pattern = '[A-Za-z]+';
-
-			const postOfficeInput = document.createElement('input');
-			postOfficeInput.type = 'text';
-			postOfficeInput.id = 'postOfficeInput';
-			postOfficeInput.classList.add('form-control');
-			postOfficeInput.placeholder = 'Enter post office number';
-			postOfficeInput.required = true;
-			postOfficeInput.pattern = '[0-9]+';
-
-			deliveryDetailsContainer.appendChild(cityInput);
-			deliveryDetailsContainer.appendChild(postOfficeInput);
+			const cityInput = '<input type="text" id="cityInput" class="form-control" placeholder="Enter your city" required pattern="[A-Za-z]+">';
+			const postOfficeInput = '<input type="text" id="postOfficeInput" class="form-control" placeholder="Enter post office number" required pattern="[0-9]+">';
+			deliveryDetailsContainer.innerHTML = cityInput + postOfficeInput;
 		} else if (delivery === 'Courier Delivery') {
-			const addressInput = document.createElement('input');
-			addressInput.type = 'text';
-			addressInput.id = 'addressInput';
-			addressInput.classList.add('form-control');
-			addressInput.placeholder = 'Enter your address';
-			addressInput.required = true;
-			addressInput.pattern = '[A-Za-z]+';
-
-			const datePicker = document.createElement('input');
-			datePicker.type = 'date';
-			datePicker.id = 'datePicker';
-			datePicker.classList.add('form-control');
-			datePicker.required = true;
-
-			const today = new Date().toISOString().split('T')[0];
-			datePicker.min = today;
-
-			const timePickerContainer = document.createElement('div');
-			timePickerContainer.classList.add('time-picker-container');
-
-			const timePicker = document.createElement('input');
-			timePicker.type = 'time';
-			timePicker.id = 'timePicker';
-			timePicker.classList.add('form-control');
-			timePicker.required = true;
-			timePicker.min = '08:00';
-			timePicker.max = '20:00';
-
-			const workingHoursMessage = document.createElement('p');
-			workingHoursMessage.textContent = 'Working hours: 08:00 - 20:00';
-
-			timePickerContainer.appendChild(timePicker);
-			timePickerContainer.appendChild(workingHoursMessage);
-
-			deliveryDetailsContainer.appendChild(addressInput);
-			deliveryDetailsContainer.appendChild(datePicker);
-			deliveryDetailsContainer.appendChild(timePickerContainer);
+			const addressInput = '<input type="text" id="addressInput" class="form-control" placeholder="Enter your address" required pattern="[A-Za-z]+">';
+			const datePicker = '<input type="date" id="datePicker" class="form-control" required min="' + new Date().toISOString().split('T')[0] + '">';
+			const timePickerContainer = '<div class="time-picker-container">' +
+				'<input type="time" id="timePicker" class="form-control" required min="08:00" max="20:00">' +
+				'<p>Working hours: 08:00 - 20:00</p>' +
+				'</div>';
+			deliveryDetailsContainer.innerHTML = addressInput + datePicker + timePickerContainer;
 		}
 	}
+	
 
 	addSlash(event) {
 		const input = event.target;
