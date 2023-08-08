@@ -1,5 +1,4 @@
-export async function sendMessage() {
-	const form = document.querySelector('.message-form--js');
+export async function sendMessage(form) {
 	const formData = new FormData(form);
 
 	try {
@@ -22,8 +21,18 @@ export async function sendMessage() {
 		alert(JSON.stringify(formDataObject));
 		alert('Message sent successfully');
 
-		return data; 
+		return data;
 	} catch (error) {
 		console.error('Error:', error);
+	}
+}
+
+export function initEmailForm() {
+	const form = document.querySelector('.message-form--js');
+	if (form) {
+		form.addEventListener('submit', async function (event) {
+			event.preventDefault();
+			await sendMessage(form);
+		});
 	}
 }

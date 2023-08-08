@@ -6,7 +6,7 @@ import * as shop from './modules/shop.js';
 import { Counter } from './modules/counter.js';
 import CheckOutForm from './modules/checkout.js';
 import { validateForm } from './modules/valid.js';
-import { sendMessage } from './modules/email.js';
+import { sendMessage, initEmailForm } from './modules/email.js';
 import { renderWishlistItems } from './modules/wishlist.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,17 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	const checkOutForm = new CheckOutForm('city', 'district', 'delivery');
 
-	new Counter();
+	const counter = new Counter();
+	counter.init();
 
 	carouselSwitcher();
 
-	const form = document.querySelector('.message-form--js');
-	if (form) {
-		form.addEventListener('submit', function (event) {
-			event.preventDefault();
-			sendMessage();
-		});
-	}
+	initEmailForm();
 
 	const wishlistContainer = document.querySelector('.wishlist__block');
 	if (wishlistContainer) {

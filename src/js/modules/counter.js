@@ -23,7 +23,6 @@ export class Counter {
 		this.cartIcon.addEventListener('click', this.handleCartClose.bind(this));
 		this.checkoutButton.addEventListener('click', this.handleCheckoutClick.bind(this));
 
-		this.init();
 	}
 
 	getElements() {
