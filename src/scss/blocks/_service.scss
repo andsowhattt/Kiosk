@@ -4,6 +4,11 @@
 		flex-direction: row-reverse;
 	}
 	.row {
+		&__icon {
+			@media screen and (max-width: 993px) {
+				padding-top: 20px;
+			}
+		}
 		&__icon-wrap {
 			width: 160px;
 			height: 160px;

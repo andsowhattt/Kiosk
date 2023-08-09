@@ -8,11 +8,11 @@
 		@media (max-width: 577px) {
 			width: 100%;
 		}
-		@media (max-width: 577px) {
-			width: 100%;
-		}
 		@media (min-width: 577px) and (max-width: 993px) {
 			width: 50%;
+		}
+		@media (min-width: 993px) {
+			width: 33.33%;
 		}
 	}
 	&-img-top {
@@ -36,10 +36,7 @@
 		.actions__btn {
 			margin-bottom: 10px;
 			&-wish {
-				@media (max-width: 1200px) {
-					margin-top: 10px;
-				}
-				@media (max-width: 993px) {
+				@media (max-width: 1199px) {
 					margin-top: 10px;
 				}
 				@media (max-width: 576px) {
