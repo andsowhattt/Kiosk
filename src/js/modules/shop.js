@@ -25,7 +25,7 @@ export function renderProducts(products, containerClass) {
 
 		card.innerHTML = `
 		<div class="card">
-			<img class="card__img card-img-top" src="${images}" alt="${title}">
+			<img class="card__img card-img-top" src="${images}" alt="${title}" style="object-fit: cover;">
 			<div class="card__block card-body">
 				<h5 class="card__block-title card-title">${title}</h5>
 				<p class="card__block-price card-text">$${price}</p>

@@ -5,6 +5,15 @@
 		box-sizing: border-box;
 		padding: 10px;
 		position: relative;
+		@media (max-width: 577px) {
+			width: 100%;
+		}
+		@media (max-width: 577px) {
+			width: 100%;
+		}
+		@media (min-width: 577px) and (max-width: 993px) {
+			width: 50%;
+		}
 	}
 	&-img-top {
 		width: 100%;
@@ -19,10 +28,28 @@
 	}
 	& &-btn{
 		background-color: var(--accent);
+		&:hover {
+			color: white;
+		}
 	}
 	&__block-actions {
 		.actions__btn {
 			margin-bottom: 10px;
+			&-wish {
+				@media (max-width: 1200px) {
+					margin-top: 10px;
+				}
+				@media (max-width: 993px) {
+					margin-top: 10px;
+				}
+				@media (max-width: 576px) {
+					margin-top: 0px;
+				}
+				@media (max-width: 398px) {
+					margin-top: 10px;
+				}
+			}
 		}
 	}
 }
+

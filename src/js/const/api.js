@@ -1,6 +1,6 @@
 export const apiLinks = {
 	products: 'https://api.escuelajs.co/api/v1/products',
-	randomProducts: '?offset=0&limit=3',
+	randomProducts: '?offset=0&limit=6',
 	randomSale: '?offset=0&limit=6',
 };
 
