@@ -1,5 +1,12 @@
 const wishlistIcon = document.querySelector('.like--js');
 
+export function initializeWishlist() {
+	const wishlistContainer = document.querySelector('.wishlist__block');
+	if (wishlistContainer) {
+		renderWishlistItems(wishlistContainer);
+	}
+}
+
 wishlistIcon.addEventListener('click', (event) => {
 	event.preventDefault(); 
 
