@@ -138,9 +138,9 @@ export class Counter {
 				const price = parseFloat(item.price.replace('$', ''));
 
 				const quantityWrapper = document.createElement('div');
-				quantityWrapper.classList.add('quantity-wrapper');
+				quantityWrapper.classList.add('modal-quantity-wrapper');
 
-				const minusIcon = this.createIconElement('fa-circle-minus quantity-icon');
+				const minusIcon = this.createIconElement('fa-circle-minus modal-quantity-icon');
 				quantityWrapper.appendChild(minusIcon);
 
 				const quantity = document.createElement('span');
@@ -148,10 +148,10 @@ export class Counter {
 				quantity.textContent = item.quantity || '1';
 				quantityWrapper.appendChild(quantity);
 
-				const plusIcon = this.createIconElement('fa-circle-plus quantity-icon');
+				const plusIcon = this.createIconElement('fa-circle-plus modal-quantity-icon');
 				quantityWrapper.appendChild(plusIcon);
 
-				const removeIcon = this.createIconElement('fa-trash remove-icon');
+				const removeIcon = this.createIconElement('fa-trash modal-remove-icon');
 				quantityWrapper.appendChild(removeIcon);
 
 				itemDetails.appendChild(quantityWrapper);
@@ -277,7 +277,7 @@ export class Counter {
 	}
 
 	handleRemoveItemClick(event) {
-		if (event.target.classList.contains('remove-icon')) {
+		if (event.target.classList.contains('modal-remove-icon')) {
 			const itemIndex = event.target.closest('.last-item').getAttribute('data-index');
 			const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
 
