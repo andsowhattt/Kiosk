@@ -1,13 +1,13 @@
-.carousel {
-	&__wrap-img {
-		height: 800px;
-		object-fit: cover;
-		@media (max-width: 577px) {
-			height: 500px;
-			object-fit: cover;
-		}
-	}
-}
+// .swiper-container{
+// 	&-img {
+// 		height: 800px;
+// 		object-fit: cover;
+// 		@media (max-width: 577px) {
+// 			height: 500px;
+// 			object-fit: cover;
+// 		}
+// 	}
+// }
 
 .swiper-container {
 	position: relative;

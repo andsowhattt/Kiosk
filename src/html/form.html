@@ -39,7 +39,6 @@
 				order
 			</button>
 		</div>
-
 		<div class="form__block-bill bill col-md-8 order-md-1">
 			<h4 class="bill__title mb-3">Billing address</h4>
 			<form class="bill__form needs-validation" novalidate>
@@ -61,7 +60,6 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="bill__form-block username mb-3">
 					<label class="username__title" for="username">Username</label>
 					<div class="username__field input-group">
@@ -74,7 +72,6 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="bill__form-block email mb-3">
 					<label class="email__title" for="email">Email</label>
 					<input type="email" class="email__input form-control" id="email" placeholder="you@example.com" required>
@@ -82,7 +79,6 @@
 						Please enter a valid email address for shipping updates.
 					</div>
 				</div>
-
 				<div class="bill__form-block address mb-3">
 					<label class="address__title" for="address">Address</label>
 					<input type="text" class="address__input form-control" id="address" placeholder="1234 Main St" required>
@@ -90,7 +86,6 @@
 						Please enter your shipping address.
 					</div>
 				</div>
-
 				<div class="bill__form-block location row">
 					<div class="location__input col-md-5 mb-3">
 						<label class="location__input-title" for="city">City</label>
@@ -118,12 +113,10 @@
 						</div>
 					</div>
 				</div>
-
-
 				<div class="bill__form-block delivery row">
 					<hr class="mb-4">
-					<h4 class="delivery__title mb-3">Delivery</h4>
 					<div class="delivery__options col-md-5 mb-3">
+						<h4 class="delivery__title mb-3">Delivery</h4>
 						<label class="delivery__options-title" for="delivery">Type of delivery</label>
 						<select class="delivery__options-select custom-select d-block w-100" id="delivery" required>
 							<option value="">Choose...</option>
@@ -134,10 +127,10 @@
 						<div class="delivery__options-invalid invalid-feedback">
 							Please select a valid delivery.
 						</div>
+						<div class="delivery__details delivery-details--js"></div>
 					</div>
-					<div class="delivery__details delivery-details--js"></div>
+					
 				</div>
-
 				<div class="bill__form-block payment d-block my-3">
 					<hr class="mb-4">
 					<h4 class="payment__title mb-3">Payment</h4>
@@ -154,7 +147,6 @@
 						<label class="payment__option-paypal custom-control-label" for="paypal">PayPal</label>
 					</div>
 				</div>
-
 				<div class="bill__form-block credit row">
 					<div class="credit__info col-md-6 mb-3">
 						<label for="credit__info-title cc-number">Credit card number</label>
@@ -172,7 +164,6 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="bill__form-block verifiraction row">
 					<div class="verifiraction__input col-md-3 mb-3">
 						<label for="verifiraction__input-title cc-expiration">Expiration</label>
@@ -182,7 +173,6 @@
 							Expiration date required. Please use the format MM/YY.
 						</div>
 					</div>
-
 					<div class="verifiraction__input col-md-3 mb-3">
 						<label for="verifiraction__input-title cc-cvv">CVV</label>
 						<input type="text" class="verifiraction__input-cvv form-control" id="cc-cvv" placeholder="" pattern="\d{3}" required>

@@ -1,3 +1,13 @@
 :root {
 	--accent: rgba(212, 255, 0);
 }
+
+.delivery-details--js {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.delivery__options-select {
+	margin-bottom: 15px;
+}

@@ -1,6 +1,6 @@
 import 'bootstrap';
 import './modules/mode.js';
-import './modules/slider.js';
+import './modules/carousel.js';
 import { Counter } from './modules/counter.js';
 import CheckOutForm from './modules/checkout.js';
 import { validateForm } from './modules/valid.js';
