@@ -1,6 +1,9 @@
 .swiper-container {
 	top: -40px;
 	overflow: hidden;
+	@media (max-width: 991px) {
+		top: 0px;
+	}
 	.swiper-slide {
 		display: flex;
 		flex-direction: column;
