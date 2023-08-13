@@ -196,19 +196,25 @@ export class Counter {
 
 	handleProductBuyClick(event) {
 		if (event.target.matches('.actions__btn .btn-buy--js') && event.target.closest('.btn-buy--js')) {
-			this.buyCount++;
-			this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
-
 			const productTitle = event.target.closest('.card__block').querySelector('.card__block-title').textContent;
-			const productPrice = event.target.closest('.card__block').querySelector('.card__block-price').textContent;
-			const productImage = event.target.closest('.card').querySelector('.card__img').src;
 
 			const lastItems = JSON.parse(localStorage.getItem('lastItems')) || [];
+			const itemExists = lastItems.some(item => item.title === productTitle);
 
-			lastItems.unshift({ title: productTitle, price: productPrice, image: productImage, quantity: 1 });
+			if (itemExists) {
+				alert('This product has already been added to the shopping cart');
+			} else {
+				this.buyCount++;
+				this.updateCount(this.buyCountElement, this.buyCount, 'buyCount');
 
-			localStorage.setItem('lastItems', JSON.stringify(lastItems));
-			this.updateLastItems();
+				const productPrice = event.target.closest('.card__block').querySelector('.card__block-price').textContent;
+				const productImage = event.target.closest('.card').querySelector('.card__img').src;
+
+				lastItems.unshift({ title: productTitle, price: productPrice, image: productImage, quantity: 1 });
+
+				localStorage.setItem('lastItems', JSON.stringify(lastItems));
+				this.updateLastItems();
+			}
 		}
 	}
 
