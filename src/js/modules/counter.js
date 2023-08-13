@@ -222,20 +222,27 @@ export class Counter {
 
 	handleWishlistClick(event) {
 		if (event.target.matches('.actions__btn .btn-wish--js')) {
-			this.wishlistCount++;
-			this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
-
 			const productTitle = event.target.closest('.card__block').querySelector('.card__block-title').textContent;
-			const productPrice = event.target.closest('.card__block').querySelector('.card__block-price').textContent;
-			const productImage = event.target.closest('.card').querySelector('.card__img').src;
-
 			const wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
 
-			wishlistItems.push({ title: productTitle, price: productPrice, image: productImage });
+			const itemExists = wishlistItems.some(item => item.title === productTitle);
 
-			localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
+			if (itemExists) {
+				alert('This product has already been added to the wishlist');
+			} else {
+				this.wishlistCount++;
+				this.updateCount(this.wishlistCountElement, this.wishlistCount, 'wishlistCount');
+
+				const productPrice = event.target.closest('.card__block').querySelector('.card__block-price').textContent;
+				const productImage = event.target.closest('.card').querySelector('.card__img').src;
+
+				wishlistItems.push({ title: productTitle, price: productPrice, image: productImage });
+
+				localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
+			}
 		}
 	}
+
 
 	handleQuantityClick(event) {
 		if (event.target.classList.contains('fa-circle-plus')) {
