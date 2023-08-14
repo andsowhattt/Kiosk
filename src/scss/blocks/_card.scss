@@ -22,9 +22,11 @@
 	}
 	&-title, 
 	&-text {
-		height: 75px; 
 		overflow: hidden;
 		text-overflow: ellipsis; 
+	}
+	&-title {
+		height: 100px;
 	}
 	& &-btn{
 		background-color: var(--accent);
@@ -36,6 +38,7 @@
 		.actions__btn {
 			margin-bottom: 10px;
 			display: flex;
+			gap: 10px;
 			justify-content: space-between;
 			&-buy {
 				width: 100%;

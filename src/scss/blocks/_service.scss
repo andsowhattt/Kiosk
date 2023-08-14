@@ -9,9 +9,12 @@
 				padding-top: 20px;
 			}
 		}
+		&__icon-img {
+			padding-bottom: 25px;
+		}
 		&__icon-wrap {
-			width: 160px;
-			height: 160px;
+			width: 220px;
+			height: 220px;
 			border-radius: 50%;
 			background-color: var(--accent);
 			border: 2px solid black;
@@ -25,6 +28,7 @@
 			}
 			@media screen and (max-width: 993px) {
 				margin: 0 auto;
+				
 			}
 		}
 		&__icon-img {

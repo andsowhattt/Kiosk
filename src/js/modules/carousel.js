@@ -1,6 +1,8 @@
 import Swiper, { Autoplay } from 'swiper';
 
-Swiper.use([ Autoplay]);
+
+Swiper.use([Autoplay]);
+
 
 const swiper = new Swiper('.carousel--js', {
 	loop: true,
