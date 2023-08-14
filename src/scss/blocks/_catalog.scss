@@ -1,0 +1,10 @@
+.catalog {
+	margin: 10px;
+	&__link {
+		color: black;
+		&:hover {
+			text-decoration: none;
+			color: black;
+		}
+	}
+}
