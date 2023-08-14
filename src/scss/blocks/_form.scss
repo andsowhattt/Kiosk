@@ -1,0 +1,10 @@
+.delivery {
+	&-details--js {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+	&__options-select {
+		margin-bottom: 15px;
+	}
+}

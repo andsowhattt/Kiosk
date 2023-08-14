@@ -35,16 +35,15 @@
 	&__block-actions {
 		.actions__btn {
 			margin-bottom: 10px;
-			&-wish {
-				@media (max-width: 1199px) {
-					margin-top: 10px;
-				}
-				@media (max-width: 576px) {
-					margin-top: 0px;
-				}
-				@media (max-width: 398px) {
-					margin-top: 10px;
-				}
+			display: flex;
+			justify-content: space-between;
+			&-buy {
+				width: 100%;
+			}
+		}
+		.actions__details {
+			&-btn {
+				width: 100%;
 			}
 		}
 	}

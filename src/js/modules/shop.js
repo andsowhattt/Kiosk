@@ -31,8 +31,12 @@ export function renderProducts(products, containerClass) {
 				<p class="card__block-price card-text">$${price}</p>
 				<div class="card__block-actions actions">
 					<div class="actions__btn">
-						<a href="#" class="actions__btn-buy btn card-btn btn-buy--js"><i class="fas fa-shopping-cart enlarged-icon"></i>Buy</a>
-						<a href="#" class="actions__btn-wish btn btn-secondary btn-wish--js"><i class="fas fa-heart enlarged-icon"></i>Wishlist this</a>
+						<a href="#" class="actions__btn-buy btn card-btn btn-buy--js">
+						<i class="fas fa-shopping-cart enlarged-icon btn-buy--js"></i>Buy
+						</a>
+						<a href="#" class="actions__btn-wish btn btn-secondary btn-wish--js">
+						<i class="fas fa-heart btn-wish--js"></i>
+						</a>
 					</div>
 					<div class="actions__details">
 						<a href="#" class="actions__details-btn btn btn-dark">View Details</a>
