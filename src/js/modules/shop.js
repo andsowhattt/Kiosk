@@ -3,14 +3,14 @@ import * as loader from './loader.js';
 export async function fetchProducts(link, containerClass) {
 	try {
 		const container = document.querySelector(containerClass);
-		const loadingOverlay = loader.createLoadingOverlay(container); 
+		const loadingOverlay = loader.createLoadingOverlay(container);
 
 		const result = await fetch(link);
 		const data = await result.json();
 
 		renderProducts(data, containerClass);
 
-		loader.hideLoadingOverlay(); 
+		loader.hideLoadingOverlay();
 	} catch (error) {
 		console.log('Error fetching data:', error);
 	}
@@ -19,13 +19,13 @@ export async function fetchProducts(link, containerClass) {
 export function renderProducts(products, containerClass) {
 	const container = document.querySelector(containerClass);
 
-	products.forEach(({ images, title, price }) => {
+	products.forEach(({ image, title, price }) => {
 		const card = document.createElement('div');
 		card.classList.add('card-col');
 
 		card.innerHTML = `
 		<div class="card">
-			<img class="card__img card-img-top" src="${images}" alt="${title}" style="object-fit: cover;">
+		<img class="card__img card-img-top" src="${image}" alt="${title}" style="object-fit: contain;">
 			<div class="card__block card-body">
 				<h5 class="card__block-title card-title">${title}</h5>
 				<p class="card__block-price card-text">$${price}</p>

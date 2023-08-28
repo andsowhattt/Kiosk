@@ -1,8 +1,8 @@
 export const apiLinks = {
-	api: 'https://api.escuelajs.co/api/v1/products',
-	products: '?offset=0&limit=48',
-	randomProducts: '?offset=0&limit=6',
-	randomSale: '?offset=0&limit=6',
+	api: 'https://fakestoreapi.com/products',
+	products: '?limit=20',
+	randomProducts: '?limit=6',
+	randomSale: '?limit=6',
 };
 apiLinks.products = apiLinks.api + apiLinks.products;
 apiLinks.randomProducts = apiLinks.api + apiLinks.randomProducts;
